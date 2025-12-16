@@ -1,0 +1,18 @@
+#dashboard {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+}
+
+#content-area {
+    display: flex;
+    height: 100%;
+}
+
+#main-content {
+    flex-grow: 1;
+    padding: 1rem;
+    position: relative;
+    overflow-y: auto;
+    background-color: var(--background-color);
+}

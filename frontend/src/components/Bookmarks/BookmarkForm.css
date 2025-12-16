@@ -1,0 +1,47 @@
+.form-container {
+  position: fixed;
+  top: 20%;
+  left: 30%;
+}
+
+.bookmark-form {
+  background-color: rgb(93, 145, 177);
+  color: white;
+  padding: 0.2rem 1rem;
+  border-radius: 2rem;
+  width: 30rem;
+  height: 27rem;
+}
+
+.input-fields {
+  display: grid;
+  grid-template-columns: 5rem auto;
+  row-gap: 1rem;
+}
+
+input:focus {
+  outline: none;
+}
+textarea:focus {
+  outline: none;
+}
+textarea {
+  width: 90%;
+  height: 4rem;
+}
+
+.buttons {
+  position: absolute;
+  right: 1.3rem;
+  bottom: 0.5rem;
+}
+
+.input {
+  width: 90%;
+  height: 2rem;
+  font-size: large;
+}
+
+.input-label {
+  margin-top: 1.4rem;
+}

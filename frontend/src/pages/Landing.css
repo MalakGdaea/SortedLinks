@@ -1,0 +1,86 @@
+.landing-page {
+  padding: 2rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    background-color: #E5EEF1;
+    border-radius: 2rem;
+}
+
+.landing-page .logo {
+    height: 3rem;
+    margin-left: 20px;
+}
+
+.landing-page .login-btn {
+    margin-right: 20px;
+    background-color: #4194C6;
+    color: white;
+    border: none;
+    border-radius: 1px 20px 20px 1px;
+    cursor: pointer;
+    font-size: 1rem;
+    height: 2.3rem;
+}
+
+.hero-content {
+    text-align: center;
+    margin-top: 5rem;
+}
+
+.hero-content .mail-logo {
+    height: 15rem;
+    margin-bottom: 0.7rem;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    color: #194458;
+    font-weight: 500;
+    margin-top: 0;
+}
+
+.hero-content button {
+   background-color: #4194C6;
+   color: white;
+   font-weight: bold;
+   padding: 0.5rem 1.5rem;
+   width: fit-content;
+   font-size: large;
+   height: fit-content;
+}
+
+.landing-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.backdrop-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75); 
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}

@@ -1,0 +1,29 @@
+#sideBar {
+    background-color: var(--primary-color);
+    height: 100%;
+    width: 15%;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.tabs-list {
+    flex-grow: 1; 
+    overflow-y: auto; 
+}
+
+#sideBar .add-tab-button {
+    align-self: center;
+    width: 75%;
+    border-radius: 2rem;
+    border: none;
+    display: flex;
+    margin: 0;
+    margin-bottom: 15px;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary-light);
+    font-weight: 600;
+    padding: 10px 0;
+    cursor: pointer;
+}

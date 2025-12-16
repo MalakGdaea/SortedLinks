@@ -1,0 +1,7 @@
+#tabsBar {
+  background-color: rgba(71, 121, 152);
+  border-radius: 0.3rem;
+  display: flex;
+  height: 3rem;
+  align-items: center;
+}
