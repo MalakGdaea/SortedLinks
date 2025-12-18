@@ -3,39 +3,22 @@ import { useEffect, useState } from "react";
 import CategoriesList from "../Collection/CategoriesList";
 import ApiService from "../../services/ApiService";
 import ActionsBar from "../ActionsBar/ActionsBar";
+import { useSelector } from 'react-redux';
+import { selectCurrentSpace } from '../../state/features/space/spaceSelectors.js';
+import { selectCollectionsByCurrentSpace } from "../../state/features/collection/collectionSelectors.js";
 
-function Content({ tab }) {
-  const [categories, setCategories] = useState([]);
+function Content() {
   const [searchedCategory, setSearchedCategory] = useState("");
+  const selectedSpace = useSelector(selectCurrentSpace);
+  const collections = useSelector(selectCollectionsByCurrentSpace);
 
   const updateSearchedCategory = (event) => {
     setSearchedCategory(event.target.value);
   };
 
-  const fetchCategories = async () => {
-    try {
-      const data = await ApiService.getCategoriesByTab(tab._id);
-      // Handle both direct array response and wrapped response
-      const categoriesData = data.data || data;
-      setCategories(Array.isArray(categoriesData) ? categoriesData : []);
-    } catch (err) {
-      console.error('Error fetching categories:', err);
-      setCategories([]);
-    }
-  };
-
-  useEffect(() => {
-    if (tab) {
-      fetchCategories();
-    }
-  }, [tab]);
-
-  console.log(categories);
-
-
-  let wantedCategories = Array.isArray(categories)
-    ? categories.filter((category) =>
-      category.categoryInfo?.name.toLowerCase().includes(searchedCategory.toLowerCase())
+  let wantedCategories = Array.isArray(collections)
+    ? collections.filter((collection) =>
+      collection.name.toLowerCase().includes(searchedCategory.toLowerCase())
     )
     : [];
 
@@ -47,12 +30,8 @@ function Content({ tab }) {
           placeholder="Find Category" onChange={updateSearchedCategory} />
       </div>
       <ActionsBar />
-      <div className="path">{tab.name} <img src="greater-than.png" /> All Collections</div>
-      <CategoriesList categories={wantedCategories}
-        deleteCategory={(categoryID) => {
-          ApiService.deleteCategory(categoryID).then(() => fetchCategories());
-        }}
-      />
+      <div className="path">{selectedSpace?.name} <img src="greater-than.png" /> All Collections</div>
+      <CategoriesList categories={wantedCategories} />
     </div>
   );
 }

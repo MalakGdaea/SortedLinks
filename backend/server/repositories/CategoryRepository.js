@@ -1,8 +1,8 @@
 const Category = require('../models/Category');
 
 class CategoryRepository {
-    findByTabAndUser(tabId, userId) {
-        return Category.find({ tab: tabId, user: userId });
+    findByUserId(userId) {
+        return Category.find({ user: userId });
     }
 
     findByIdAndUser(id, userId) {

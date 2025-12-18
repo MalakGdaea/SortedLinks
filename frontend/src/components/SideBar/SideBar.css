@@ -1,8 +1,9 @@
 #sideBar {
     background-color: var(--primary-color);
     height: 100%;
-    width: 15%;
+    width: 18%;
     margin-top: 0;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
 }

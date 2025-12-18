@@ -4,18 +4,8 @@ const ApiError = require('../errors/ApiError');
 const { getIdObject } = require('./databaseManager');
 
 class CategoryService {
-    async getByTab(tabId, userId) {
-        const categories = await CategoryRepository.findByTabAndUser(tabId, userId);
-        const result = await Promise.all(
-            categories.map(async (category) => {
-                const bookmarks = await BookmarkRepository.findByCategoryAndUser(category._id, userId);
-                return {
-                    categoryInfo: category,
-                    bookmarks: bookmarks,
-                };
-            })
-        );
-        return result;
+    async getAllCategories(userId) {
+        return CategoryRepository.findByUserId(userId);
     }
 
     async create(tabId, name, userId) {

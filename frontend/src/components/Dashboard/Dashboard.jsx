@@ -1,57 +1,30 @@
 import './Dashboard.css';
-import ApiService from "../../services/ApiService";
-import { useEffect, useState, useContext } from "react";
-import { TabContext } from "../../contexts/TabContext";
 import Content from "./Content";
 import SideBar from "../SideBar/SideBar";
 import NavBar from "../NavBar/NavBar";
+import { useSelector } from 'react-redux';
+import { selectCurrentSpace } from '../../state/features/space/spaceSelectors.js';
+import { useDispatch } from 'react-redux';
+import { fetchCollections } from '../../state/features/collection/collectionThunks.js';
+import { useEffect } from 'react';
+import { fetchLinks } from '../../state/features/link/linkThunks.js';
 
 function Dashboard() {
-  const { selectedTab, selectTab } = useContext(TabContext);
-  const [tabs, setTabs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const selectedSpace = useSelector(selectCurrentSpace);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchTabs();
-  }, []);
-
-  useEffect(() => {
-    if (tabs.length > 0 && !selectedTab) {
-      selectTab(tabs[0]);
-    }
-  }, [tabs, selectedTab, selectTab]);
-
-  const fetchTabs = async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const data = await ApiService.getTabs();
-      setTabs(data.data || data);
-    } catch (err) {
-      setError(err.message || 'Failed to load tabs');
-      console.error('Error fetching tabs:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+    dispatch(fetchCollections());
+    dispatch(fetchLinks());
+  }, [dispatch]);
 
   return (
     <div id="dashboard">
       <NavBar />
       <div id="content-area">
-        <SideBar tabs={tabs} />
+        <SideBar />
         <main id="main-content">
-          {selectedTab && (<Content tab={selectedTab} />
-          )}
+          {selectedSpace && <Content />}
         </main>
       </div>
     </div>

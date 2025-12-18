@@ -52,8 +52,7 @@ class ApiService {
         this.setToken(null);
     }
 
-    // Bookmarks
-    async getBookmarks() {
+    async getLinks() {
         const response = await fetch(`${this.baseURL}/bookmarks`, {
             method: 'GET',
             headers: this.getHeaders(),
@@ -61,16 +60,16 @@ class ApiService {
         return this._handleResponse(response);
     }
 
-    async createBookmark(title, URL, category, tags, note) {
+    async createLink(linkData) {
         const response = await fetch(`${this.baseURL}/bookmarks`, {
             method: 'POST',
             headers: this.getHeaders(),
-            body: JSON.stringify({ title, URL, category, tags, note }),
+            body: JSON.stringify(linkData),
         });
         return this._handleResponse(response);
     }
 
-    async deleteBookmark(id) {
+    async deleteLink(id) {
         const response = await fetch(`${this.baseURL}/bookmarks/${id}`, {
             method: 'DELETE',
             headers: this.getHeaders(),
@@ -78,8 +77,7 @@ class ApiService {
         return this._handleResponse(response);
     }
 
-    // Tabs
-    async getTabs() {
+    async getSpaces() {
         const response = await fetch(`${this.baseURL}/tabs`, {
             method: 'GET',
             headers: this.getHeaders(),
@@ -87,7 +85,7 @@ class ApiService {
         return this._handleResponse(response);
     }
 
-    async createTab(name) {
+    async createSpace(name) {
         const response = await fetch(`${this.baseURL}/tabs/${name}`, {
             method: 'POST',
             headers: this.getHeaders(),
@@ -95,7 +93,7 @@ class ApiService {
         return this._handleResponse(response);
     }
 
-    async deleteTab(name) {
+    async deleteSpace(name) {
         const response = await fetch(`${this.baseURL}/tabs/${name}`, {
             method: 'DELETE',
             headers: this.getHeaders(),
@@ -103,25 +101,25 @@ class ApiService {
         return this._handleResponse(response);
     }
 
-    // Categories
-    async getCategoriesByTab(tabID) {
-        const response = await fetch(`${this.baseURL}/categories/${tabID}`, {
+    async getCollections() {
+        const response = await fetch(`${this.baseURL}/categories`, {
             method: 'GET',
             headers: this.getHeaders(),
         });
+
         return this._handleResponse(response);
     }
 
-    async createCategory(tabID, categoryName) {
-        const response = await fetch(`${this.baseURL}/categories/${tabID}/${categoryName}`, {
+    async createCollection(spaceId, collectionName) {
+        const response = await fetch(`${this.baseURL}/categories/${spaceId}/${collectionName}`, {
             method: 'POST',
             headers: this.getHeaders(),
         });
         return this._handleResponse(response);
     }
 
-    async deleteCategory(categoryID) {
-        const response = await fetch(`${this.baseURL}/categories/${categoryID}`, {
+    async deleteCollection(collectionId) {
+        const response = await fetch(`${this.baseURL}/categories/${collectionId}`, {
             method: 'DELETE',
             headers: this.getHeaders(),
         });

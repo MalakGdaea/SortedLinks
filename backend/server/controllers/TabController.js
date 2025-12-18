@@ -14,7 +14,7 @@ class TabController {
         try {
             const { name } = req.params;
             const tab = await TabService.create(name, req.user._id);
-            res.status(201).json({ message: `Tab "${name}" created successfully`, tab });
+            res.status(201).json({ message: `Tab "${name}" created successfully`, doc: tab });
         } catch (err) {
             next(err);
         }

@@ -1,11 +1,9 @@
 const CategoryService = require('../services/CategoryService');
-const { getIdObject } = require('../services/databaseManager');
 
 class CategoryController {
-    async getByTab(req, res, next) {
+    async getAllCategories(req, res, next) {
         try {
-            const { tabID } = req.params;
-            const categories = await CategoryService.getByTab(tabID, req.user._id);
+            const categories = await CategoryService.getAllCategories(req.user._id);
             res.status(200).json(categories);
         } catch (err) {
             next(err);
