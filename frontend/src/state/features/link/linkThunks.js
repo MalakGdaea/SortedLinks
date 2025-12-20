@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import ApiService from "../../../services/ApiService";
 
 export const fetchLinks = createAsyncThunk(
-    'link/fetchLinks',
+    'links/fetchLinks',
     async (_, { rejectWithValue }) => {
         try {
             const links = await ApiService.getLinks();
@@ -14,7 +14,7 @@ export const fetchLinks = createAsyncThunk(
 );
 
 export const createLink = createAsyncThunk(
-    'link/createLink',
+    'links/createLink',
     async (linkData, { rejectWithValue }) => {
         try {
             const link = await ApiService.createLink(linkData);

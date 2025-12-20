@@ -1,9 +1,6 @@
 import "./Form.css";
-import { useSelector } from "react-redux";
-import { selectIsLoading } from "../../../state/features/space/spaceSelectors";
 
-function Form({ formInfo, onSubmit, hideForm }) {
-  const isLoading = useSelector(selectIsLoading);
+function Form({ formInfo, onSubmit, hideForm, isLoading }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,9 +33,6 @@ function Form({ formInfo, onSubmit, hideForm }) {
                   disabled={isLoading}
                   defaultValue=""
                 >
-                  <option value="" disabled>
-                    {field.placeholder || "Select a collection"}
-                  </option>
                   {field.options?.map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}

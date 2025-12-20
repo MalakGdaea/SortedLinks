@@ -16,6 +16,9 @@ class BookmarkService {
         if (!url) {
             throw ApiError.badRequest('URL is required');
         }
+        if (!categoryId) {
+            throw ApiError.badRequest('category id is required');
+        }
         const existing = await BookmarkRepository.findByUrlAndUser(url, userId);
         if (existing) {
             throw ApiError.conflict('Bookmark with this URL already exists');

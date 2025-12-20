@@ -24,3 +24,27 @@ export const createCollection = createAsyncThunk(
         }
     }
 )
+
+export const updateCollection = createAsyncThunk(
+    'collections/updateCollection',
+    async ({ collectionId, newName }, { rejectWithValue }) => {
+        try {
+            const response = await ApiService.updateCollection(collectionId, newName);
+            return response;
+        } catch (error) {
+            return rejectWithValue(error.response);
+        }
+    }
+)
+
+export const deleteCollection = createAsyncThunk(
+    'collections/deleteCollection',
+    async ({ collectionId }, { rejectWithValue }) => {
+        try {
+            const response = await ApiService.deleteCollection(collectionId);
+            return response;
+        } catch (error) {
+            return rejectWithValue(error.response);
+        }
+    }
+)

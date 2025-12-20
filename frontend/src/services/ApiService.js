@@ -52,6 +52,8 @@ class ApiService {
         this.setToken(null);
     }
 
+
+    // Links API
     async getLinks() {
         const response = await fetch(`${this.baseURL}/bookmarks`, {
             method: 'GET',
@@ -77,6 +79,8 @@ class ApiService {
         return this._handleResponse(response);
     }
 
+
+    // Space API
     async getSpaces() {
         const response = await fetch(`${this.baseURL}/tabs`, {
             method: 'GET',
@@ -101,6 +105,8 @@ class ApiService {
         return this._handleResponse(response);
     }
 
+
+    // Collection API
     async getCollections() {
         const response = await fetch(`${this.baseURL}/categories`, {
             method: 'GET',
@@ -123,6 +129,15 @@ class ApiService {
             method: 'DELETE',
             headers: this.getHeaders(),
         });
+        return this._handleResponse(response);
+    }
+
+    async updateCollection(collectionId, newName) {
+        const response = await fetch(`${this.baseURL}/categories/${collectionId}`, {
+            method: 'PATCH',
+            headers: this.getHeaders(),
+            body: JSON.stringify({ name: newName })
+        })
         return this._handleResponse(response);
     }
 

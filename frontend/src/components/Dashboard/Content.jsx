@@ -1,7 +1,6 @@
 import "./Content.css";
-import { useEffect, useState } from "react";
-import CategoriesList from "../Collection/CategoriesList";
-import ApiService from "../../services/ApiService";
+import { useState } from "react";
+import CollectionList from "../Collection/CollectionList";
 import ActionsBar from "../ActionsBar/ActionsBar";
 import { useSelector } from 'react-redux';
 import { selectCurrentSpace } from '../../state/features/space/spaceSelectors.js';
@@ -31,7 +30,7 @@ function Content() {
       </div>
       <ActionsBar />
       <div className="path">{selectedSpace?.name} <img src="greater-than.png" /> All Collections</div>
-      <CategoriesList categories={wantedCategories} />
+      <CollectionList collections={wantedCategories} />
     </div>
   );
 }

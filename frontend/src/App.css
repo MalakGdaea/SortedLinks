@@ -18,5 +18,31 @@ body {
 }
 
 * {
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Width of the scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* Track (the background area) */
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+/* Thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+  background: #cbd5e0; /* Subtle grey */
+  border-radius: 10px;
+  border: 2px solid transparent; /* Creates a "floating" effect */
+  background-clip: content-box;
+}
+
+/* Hover effect */
+::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
 }

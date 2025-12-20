@@ -12,9 +12,9 @@ class BookmarkController {
 
     async create(req, res, next) {
         try {
-            const { title, URL, categoryId, tags, note } = req.body;
-            const bookmark = await BookmarkService.create(title, URL, categoryId, tags, note, req.user._id);
-            res.status(201).json({ message: 'Bookmark created successfully', bookmark });
+            const { title, URL, collectionId, tags, note } = req.body;
+            const bookmark = await BookmarkService.create(title, URL, collectionId, tags, note, req.user._id);
+            res.status(201).json({ message: 'Bookmark created successfully', doc: bookmark });
         } catch (err) {
             next(err);
         }

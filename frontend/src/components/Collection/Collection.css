@@ -1,11 +1,11 @@
-.category-container {
+.collection-container {
     margin-bottom: 30px;
     border-top: 1px solid #e0e0e0;
     padding-top: 25px;
     width: 100%;
 }
 
-.category-header {
+.collection-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,31 +13,55 @@
     padding-bottom: 5px;
 }
 
-.category-title {
+.collection-title {
     font-size: 20px;
     font-weight: 600;
     color: #333; /* Dark text color */
     margin: 0;
 }
 
-.category-actions {
+.collection-actions {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.edit-btn {
+.btn img {
+    width: 100%;
+    height: 100%;
+}
+
+.collection-actions .btn {
     font-size: 14px;
     color: #6a6a6a; /* Lighter color for secondary action */
     cursor: pointer;
-    background-color: #E6E8EA;
     transition: color 0.2s;
-    padding: 0.4rem 0.7rem;
     border-radius: 15px;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    line-height: 1;
+    border: 2px solid #E6E8EA;
 }
 
-.edit-btn:hover {
-    color: #007bff; /* Blue hover for interaction */
+.collection-container:hover .collection-actions .btn {
+    opacity: 1;
+}
+
+.collection-actions .add {
+    padding: 5px;
+}
+
+.collection-actions .settings {
+    padding: 2px;
+}
+
+.btn:hover {
+    border-color: #007bff;
 }
 
 .collapse-icon {
@@ -49,14 +73,12 @@
 
 .bookmark-grid {
     display: grid;
-    /* Create a responsive grid: minimum size of 200px per column */
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px; /* Space between cards */
+    gap: 15px; 
 }
-
-
 
 .collapse-icon img {
     width: 1rem;
     height: 1rem;
 }
+

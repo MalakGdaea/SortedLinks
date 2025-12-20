@@ -27,10 +27,11 @@
 }
 
 .link-card .site-icon {
-    border-radius: 50%; 
     margin-right: 10px; 
-    width: 3rem;
+    width: 2.5rem;
     object-fit: contain; 
+    image-rendering: pixelated;
+    image-rendering: -webkit-optimize-contrast;
 }
 
 .link-card .link-name {

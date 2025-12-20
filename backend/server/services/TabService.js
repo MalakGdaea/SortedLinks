@@ -20,15 +20,15 @@ class TabService {
         return TabRepository.create({ name, user: userId });
     }
 
-    async delete(tabName, userId) {
-        const tab = await TabRepository.findByNameAndUser(tabName, userId);
+    async delete(id, userId) {
+        const tab = await TabRepository.findByIdAndUser(id, userId);
         if (!tab) {
-            throw ApiError.notFound(`Tab "${tabName}" not found`);
+            throw ApiError.notFound(`Tab with ID "${id}" not found`);
         }
         // Delete all categories in this tab and their bookmarks
         await CategoryRepository.deleteByTabAndUser(tab._id, userId);
         await this._deleteBookmarksWithoutCategory(userId);
-        return TabRepository.deleteByNameAndUser(tabName, userId);
+        return TabRepository.deleteByIdAndUser(id, userId);
     }
 
     async _deleteBookmarksWithoutCategory(userId) {

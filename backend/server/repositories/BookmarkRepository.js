@@ -33,6 +33,13 @@ class BookmarkRepository {
     deleteByIdAndUser(id, userId) {
         return Bookmark.findOneAndDelete({ _id: id, user: userId });
     }
+
+    deleteByCategoryAndUser(categoryId, userId) {
+        return Bookmark.deleteMany({
+            category: categoryId,
+            user: userId
+        });
+    }
 }
 
 module.exports = new BookmarkRepository();

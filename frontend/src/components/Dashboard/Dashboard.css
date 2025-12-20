@@ -2,11 +2,12 @@
     display: grid;
     grid-template-rows: auto 1fr;
     height: 100vh;
+    overflow: hidden;
 }
 
 #content-area {
     display: flex;
-    height: 100%;
+    overflow: hidden;
 }
 
 #main-content {

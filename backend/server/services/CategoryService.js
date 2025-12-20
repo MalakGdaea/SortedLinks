@@ -28,7 +28,26 @@ class CategoryService {
         if (!category) {
             throw ApiError.notFound('Category not found');
         }
+        await BookmarkRepository.deleteByCategoryAndUser(categoryId, userId);
         return CategoryRepository.deleteByIdAndUser(categoryId, userId);
+    }
+
+    async updateName(categoryId, userId, newName) {
+        if (!newName || newName.trim() === '') {
+            throw ApiError.badRequest('New collection name is required');
+        }
+
+        const updatedCategory = await CategoryRepository.updateByIdAndUser(
+            categoryId,
+            userId,
+            { name: newName.trim() }
+        );
+
+        if (!updatedCategory) {
+            throw ApiError.notFound('Category not found or you do not have permission to edit it');
+        }
+
+        return updatedCategory;
     }
 }
 

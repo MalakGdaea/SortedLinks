@@ -22,9 +22,9 @@ class TabController {
 
     async delete(req, res, next) {
         try {
-            const { name } = req.params;
-            await TabService.delete(name, req.user._id);
-            res.status(202).json({ message: `Tab "${name}" deleted successfully` });
+            const { id } = req.params;
+            await TabService.delete(id, req.user._id);
+            res.status(202).json({ message: `Tab deleted successfully` });
         } catch (err) {
             next(err);
         }

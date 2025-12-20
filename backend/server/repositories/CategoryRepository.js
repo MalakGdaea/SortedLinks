@@ -33,6 +33,14 @@ class CategoryRepository {
     deleteByTabAndUser(tabId, userId) {
         return Category.deleteMany({ tab: tabId, user: userId });
     }
+
+    updateByIdAndUser(id, userId, updateData) {
+        return Category.findOneAndUpdate(
+            { _id: id, user: userId },
+            { $set: updateData },
+            { new: true, runValidators: true }
+        );
+    }
 }
 
 module.exports = new CategoryRepository();
