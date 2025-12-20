@@ -1,8 +1,8 @@
-const API_BASE_URL = 'http://localhost:3012';
+import { SERVER_ROUTE } from "../config";
 
 class ApiService {
     constructor() {
-        this.baseURL = API_BASE_URL;
+        this.baseURL = SERVER_ROUTE;
     }
 
     getToken() {
