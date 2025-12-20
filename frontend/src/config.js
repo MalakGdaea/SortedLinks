@@ -1,4 +1,7 @@
-const SERVER_ROUTE = "http://localhost:3012/";
+const SERVER_ROUTE =
+    process.env.REACT_APP_SERVER_ROUTE || "http://localhost:3012/";
+
+export default SERVER_ROUTE;
 const FAV_ICON_LINK = "http://www.google.com/s2/favicons?domain=";
 
 
