@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_COLLECTION, ADD_LINK, ADD_SPACE, EDIT_COLLECTION } from "../config";
-import { CollectionFormInfo, LinkFormInfo, editCollection, SpaceFormInfo } from "../constants/formInfo";
+import { ADD_COLLECTION, ADD_LINK, ADD_SPACE, EDIT_COLLECTION, EDIT_LINK, EDIT_SPACE } from "../config";
+import { CollectionFormInfo, LinkFormInfo, editLink, editCollection, SpaceFormInfo, editSpace } from "../constants/formInfo";
 import { createCollection, updateCollection } from "../state/features/collection/collectionThunks";
-import { createLink } from "../state/features/link/linkThunks";
+import { createLink, updateLink } from "../state/features/link/linkThunks";
 import { selectIsLoading } from "../state/features/space/spaceSelectors";
 import { selectLinksLoading } from "../state/features/link/linkSelectors";
 import { selectCollectionsByCurrentSpace } from "../state/features/collection/collectionSelectors";
 import { selectIsLoading as selectCollectionLoading } from "../state/features/collection/collectionSelectors";
-import { createSpace } from "../state/features/space/spaceThunks";
+import { createSpace, updateSpace } from "../state/features/space/spaceThunks";
 
 
 export const useFormManager = (contextData = {}) => {
@@ -72,6 +72,22 @@ export const useFormManager = (contextData = {}) => {
             loading: isCollectionLoading,
             action: (data) => updateCollection({ collectionId: contextData.collection?._id, newName: data.name }),
         },
+        [EDIT_SPACE]: {
+            config: editSpace,
+            loading: isSpaceLoading,
+            action: (data) => updateSpace({ spaceId: contextData.space?._id, newName: data.name }),
+        },
+        [EDIT_LINK]: {
+            config: {
+                ...editLink,
+                title: `Edit Link: ${contextData.link?.title || 'Link'}`
+            },
+            loading: isLinkLoading,
+            action: (data) => updateLink({
+                linkId: contextData.link?._id,
+                updatedData: data
+            }),
+        }
     };
 
     const currentForm = formConfigs[activeFormType];
@@ -92,5 +108,6 @@ export const useFormManager = (contextData = {}) => {
         currentForm,
         handleSubmit,
         closeForm: () => setActiveFormType(null)
+
     };
 };

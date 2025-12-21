@@ -23,8 +23,8 @@ class BookmarkController {
     async delete(req, res, next) {
         try {
             const { id } = req.params;
-            await BookmarkService.delete(id, req.user._id);
-            res.status(202).json({ message: 'Bookmark deleted successfully' });
+            const deleted = await BookmarkService.delete(id, req.user._id);
+            res.status(202).json({ message: 'Bookmark deleted successfully', doc: deleted });
         } catch (err) {
             next(err);
         }

@@ -12,9 +12,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const token = ApiService.getToken();
         if (token) {
-            // Token exists, but we don't have user data yet
-            // In a real app, you'd verify the token with the backend
-            setUser({ token }); // Minimal user object
+            setUser({ token });
         }
         setIsLoading(false);
     }, []);

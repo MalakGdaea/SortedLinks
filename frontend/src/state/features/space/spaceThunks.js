@@ -24,3 +24,27 @@ export const createSpace = createAsyncThunk(
         }
     }
 )
+
+export const deleteSpace = createAsyncThunk(
+    'spaces/deleteSpace',
+    async (spaceId, { rejectWithValue }) => {
+        try {
+            const response = await ApiService.deleteSpace(spaceId);
+            return response;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+)
+
+export const updateSpace = createAsyncThunk(
+    'spaces/updateSpace',
+    async ({ spaceId, newName }, { rejectWithValue }) => {
+        try {
+            const response = await ApiService.updateSpace(spaceId, newName);
+            return response;
+        } catch (error) {
+            return rejectWithValue(error.response);
+        }
+    }
+)

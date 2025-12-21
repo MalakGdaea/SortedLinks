@@ -4,25 +4,26 @@ import { useSelector } from "react-redux";
 import { selectLinksByCollectionId } from "../../state/features/link/linkSelectors";
 import Form from "../Shared/Form/Form";
 import { useFormManager } from "../../hooks/useFormManager";
-import { ADD_LINK, EDIT_COLLECTION, DELETE_COLLECTION } from "../../config";
+import { ADD_LINK, EDIT_COLLECTION, DELETE_COLLECTION, EDIT_LINK, DELETE_LINK } from "../../config";
 import { useState } from "react";
 import Dropdown from "../Shared/Dropdown/Dropdown";
 import DeleteConfirm from "../Shared/DeleteConfirm/DeleteConfirm";
-import { deleteCollection } from "../../state/features/collection/collectionThunks";
-import { selectIsLoading } from "../../state/features/collection/collectionSelectors";
-import { useDispatch } from "react-redux";
 
 function Collection({ collection }) {
   const [collapse, setCollapse] = useState(false);
-  const collectionLoader = useSelector(selectIsLoading);
-  const dispatch = useDispatch();
+  const [selectedLink, setSelectedLink] = useState(null);
 
   const links = useSelector(state =>
     selectLinksByCollectionId(state, collection._id)
   );
 
   const { activeFormType, setActiveFormType, currentForm, handleSubmit, closeForm } =
-    useFormManager({ collection });
+    useFormManager({ collection, link: selectedLink });
+
+  const handleLinkAction = (type, link) => {
+    setSelectedLink(link);
+    setActiveFormType(type);
+  };
 
   const menuOptions = [
     {
@@ -38,34 +39,38 @@ function Collection({ collection }) {
     }
   ];
 
+  const renderModal = () => {
+    if (!activeFormType) return null;
+
+    if (activeFormType === DELETE_COLLECTION || activeFormType === DELETE_LINK) {
+      return (
+        <DeleteConfirm
+          action={activeFormType}
+          resourceToDelete={activeFormType === DELETE_LINK ? selectedLink : collection}
+          onClose={closeForm}
+        />
+      );
+    }
+
+    return (
+      <Form
+        formInfo={currentForm.config}
+        onSubmit={handleSubmit}
+        hideForm={closeForm}
+        isLoading={currentForm.loading}
+        initialValues={currentForm.initialValues}
+      />
+    );
+  };
+
   return (
     <div className="collection-container">
-      {activeFormType && activeFormType !== DELETE_COLLECTION && (
-        <Form
-          formInfo={currentForm.config}
-          onSubmit={handleSubmit}
-          hideForm={() => closeForm()}
-          isLoading={currentForm.loading}
-        />
-      )}
-
-      {activeFormType === DELETE_COLLECTION && (
-        <DeleteConfirm
-          title={`Delete "${collection.name}"?`}
-          description="This will permanently delete this collection and all the bookmarks inside it."
-          onConfirm={() => dispatch(deleteCollection({ collectionId: collection?._id }))}
-          onCancel={() => setActiveFormType(null)}
-          isLoading={collectionLoader}
-        />
-      )}
+      {renderModal()}
       <div className="collection-header">
         <h3 className="collection-title">{collection.name}</h3>
         <div className="collection-actions">
           <span className="btn add" onClick={() => setActiveFormType(ADD_LINK)}><img src='plus.svg' /></span>
-          <Dropdown
-            trigger={<span className="btn settings"><img src='dots.png' alt="options" /></span>}
-            options={menuOptions}
-          />
+          <span className="btn"><Dropdown options={menuOptions} /></span>
           <span className="collapse-icon btn "
             onClick={() => setCollapse(!collapse)}>
             <img src={collapse ? "collapse-arrow.png" : "expand-arrow.png"} /></span>
@@ -74,7 +79,9 @@ function Collection({ collection }) {
         !collapse &&
         <div className="bookmark-grid">
           {links?.map((link) => (
-            <Link key={link._id} link={link} />
+            <Link key={link._id} link={link}
+              onEdit={() => handleLinkAction(EDIT_LINK, link)}
+              onDelete={() => handleLinkAction(DELETE_LINK, link)} />
           ))}
         </div>
       }

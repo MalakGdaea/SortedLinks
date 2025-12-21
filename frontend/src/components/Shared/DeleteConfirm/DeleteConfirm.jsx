@@ -1,8 +1,53 @@
 import './DeleteConfirm.css';
+import { deleteCollection } from '../../../state/features/collection/collectionThunks';
+import { deleteSpace } from '../../../state/features/space/spaceThunks';
+import { deleteLink } from '../../../state/features/link/linkThunks';
+import { useDispatch, useSelector } from 'react-redux';
+import { DELETE_COLLECTION, DELETE_LINK, DELETE_SPACE } from '../../../config';
+import { selectIsLoading as spaceLoading } from "../../../state/features/space/spaceSelectors";
+import { selectIsLoading as collectionLoading } from "../../../state/features/collection/collectionSelectors";
+import { selectLinksLoading } from "../../../state/features/link/linkSelectors";
 
-const DeleteConfirm = ({ title, description, onConfirm, onCancel, isLoading }) => {
+const DeleteConfirm = ({ action, resourceToDelete, onClose }) => {
+    const dispatch = useDispatch();
+    const isSpaceLoading = useSelector(spaceLoading);
+    const isCollectionLoading = useSelector(collectionLoading);
+    const isLinkLoading = useSelector(selectLinksLoading);
+
+    const resourceMap = {
+        [DELETE_SPACE]: {
+            title: `Delete "${resourceToDelete?.name}"?`,
+            description: "This will permanently delete this space and all collections inside it.",
+            onConfirm: async () => {
+                await dispatch(deleteSpace(resourceToDelete._id)).unwrap();
+                onClose();
+            },
+            isLoading: isSpaceLoading
+        },
+        [DELETE_COLLECTION]: {
+            title: `Delete "${resourceToDelete?.name}"?`,
+            description: "This will permanently delete this collection and all the bookmarks inside it.",
+            onConfirm: async () => {
+                await dispatch(deleteCollection(resourceToDelete._id)).unwrap();
+                onClose();
+            }
+        },
+        [DELETE_LINK]: {
+            title: `Delete ${resourceToDelete.title} Bookmark?`,
+            description: "Are you sure you want to remove this link? This cannot be undone.",
+            onConfirm: async () => {
+                await dispatch(deleteLink(resourceToDelete._id)).unwrap();
+                onClose()
+            },
+            isLoading: isLinkLoading
+        }
+    };
+
+    const config = resourceMap[action] || {};
+    const { title, description, onConfirm, isLoading } = config;
+
     return (
-        <div className="modal-backdrop">
+        <div className="modal-backdrop" >
             <div className="confirm-card">
                 <div className="confirm-content">
                     <h2>{title || "Are you sure?"}</h2>
@@ -12,7 +57,7 @@ const DeleteConfirm = ({ title, description, onConfirm, onCancel, isLoading }) =
                 <div className="confirm-actions">
                     <button
                         className="btn-cancel"
-                        onClick={onCancel}
+                        onClick={onClose}
                         disabled={isLoading}
                     >
                         Cancel
@@ -25,7 +70,7 @@ const DeleteConfirm = ({ title, description, onConfirm, onCancel, isLoading }) =
                     </button>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

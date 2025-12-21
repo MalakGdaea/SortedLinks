@@ -52,7 +52,7 @@ const collectionSlice = createSlice({
             })
             .addCase(updateCollection.fulfilled, (state, action) => {
                 state.isLoading = false;
-                const updatedCollection = action.payload.category;
+                const updatedCollection = action.payload.doc;
                 state.collections = state.collections.map((col) =>
                     col._id === updatedCollection._id ? updatedCollection : col
                 );

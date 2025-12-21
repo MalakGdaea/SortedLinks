@@ -33,6 +33,14 @@ class TabRepository {
     deleteByIdAndUser(id, userId) {
         return Tab.findOneAndDelete({ _id: id, user: userId });
     }
+
+    updateByIdAndUser(id, userId, updateData) {
+        return Tab.findOneAndUpdate(
+            { _id: id, user: userId },
+            { $set: updateData },
+            { new: true, runValidators: true }
+        );
+    }
 }
 
 module.exports = new TabRepository();

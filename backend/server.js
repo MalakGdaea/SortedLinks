@@ -31,6 +31,10 @@ app.use("/bookmarks", bookmarkRoutes);
 app.use("/tabs", tabRoutes);
 app.use("/categories", categoryRoutes);
 
+app.get("/", (req, res) => {
+  res.send("Server is running")
+})
+
 // Centralized error handler (MUST be last)
 const errorHandler = require("./server/middleware/errorHandler");
 app.use(errorHandler);

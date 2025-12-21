@@ -24,3 +24,27 @@ export const createLink = createAsyncThunk(
         }
     }
 );
+
+export const updateLink = createAsyncThunk(
+    'links/updateLink',
+    async (updatedDate, { rejectWithValue }) => {
+        try {
+            const link = await ApiService.updateLink(updatedDate);
+            return link;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+)
+
+export const deleteLink = createAsyncThunk(
+    'links/deleteLink',
+    async (linkId, { rejectWithValue }) => {
+        try {
+            const response = await ApiService.deleteLink(linkId);
+            return response;
+        } catch (error) {
+            return rejectWithValue(error.response);
+        }
+    }
+)

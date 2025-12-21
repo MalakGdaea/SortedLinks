@@ -23,8 +23,24 @@ class TabController {
     async delete(req, res, next) {
         try {
             const { id } = req.params;
-            await TabService.delete(id, req.user._id);
-            res.status(202).json({ message: `Tab deleted successfully` });
+            const deletedTab = await TabService.delete(id, req.user._id);
+            res.status(202).json({ message: `Tab deleted successfully`, doc: deletedTab });
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async update(req, res, next) {
+        try {
+            const { id } = req.params;
+            const { name } = req.body;
+            const userId = req.user._id;
+
+            const tab = await TabService.updateName(id, userId, name);
+            res.status(200).json({
+                message: 'Tab renamed successfully',
+                doc: tab
+            });
         } catch (err) {
             next(err);
         }

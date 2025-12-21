@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchSpaces, createSpace } from './spaceThunks';
+import { fetchSpaces, createSpace, deleteSpace, updateSpace } from './spaceThunks';
 
 const initialState = {
     currentSpace: null,
@@ -36,6 +36,7 @@ const spaceSlice = createSlice({
             // createSpace
             .addCase(createSpace.pending, (state) => {
                 state.isLoading = true;
+                state.error = null;
             })
             .addCase(createSpace.fulfilled, (state, action) => {
                 state.isLoading = false;
@@ -44,7 +45,38 @@ const spaceSlice = createSlice({
             .addCase(createSpace.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
-            });
+            })
+
+            // delete space
+            .addCase(deleteSpace.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(deleteSpace.fulfilled, (state, action) => {
+                const deletedSpace = action.payload.doc;
+                state.isLoading = false;
+                state.error = null;
+                state.spaces = state.spaces.filter(
+                    (space) => space._id !== deletedSpace._id
+                );
+            })
+
+            //update space
+            .addCase(updateSpace.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(updateSpace.fulfilled, (state, action) => {
+                state.isLoading = false;
+                const updatedSpace = action.payload.doc;
+                state.spaces = state.spaces.map((space) =>
+                    space._id === updatedSpace._id ? updatedSpace : space
+                );
+            })
+            .addCase(updateSpace.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
     },
 });
 

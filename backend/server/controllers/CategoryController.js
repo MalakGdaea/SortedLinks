@@ -39,7 +39,7 @@ class CategoryController {
             const category = await CategoryService.updateName(id, userId, name);
             res.status(200).json({
                 message: 'Collection renamed successfully',
-                category
+                doc: category
             });
         } catch (err) {
             next(err);

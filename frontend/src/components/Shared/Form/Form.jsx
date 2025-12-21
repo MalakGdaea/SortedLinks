@@ -1,6 +1,6 @@
 import "./Form.css";
 
-function Form({ formInfo, onSubmit, hideForm, isLoading }) {
+function Form({ formInfo, onSubmit, hideForm, isLoading, initialValues = {} }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,7 +31,7 @@ function Form({ formInfo, onSubmit, hideForm, isLoading }) {
                   name={field.name}
                   required={field.required || false}
                   disabled={isLoading}
-                  defaultValue=""
+                  defaultValue={initialValues[field.name] || ""}
                 >
                   {field.options?.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -53,6 +53,7 @@ function Form({ formInfo, onSubmit, hideForm, isLoading }) {
                   rows={5}
                   placeholder={field.placeholder}
                   disabled={isLoading}
+                  defaultValue={initialValues[field.name] || ""}
                 />
               );
             }
@@ -67,6 +68,7 @@ function Form({ formInfo, onSubmit, hideForm, isLoading }) {
                 placeholder={field.placeholder}
                 required={field.required || false}
                 disabled={isLoading}
+                defaultValue={initialValues[field.name] || ""}
               />
             );
           })}

@@ -1,4 +1,3 @@
-
 .menu-wrapper {
   position: relative; 
   display: flex;
@@ -16,6 +15,7 @@
   z-index: 100;
   min-width: 140px;
   border: 1px solid #eee;
+  overflow: hidden;
 }
 
 .options-list li {
@@ -46,12 +46,15 @@
   opacity: 0.6;
 }
 
-/* Backdrop allows clicking anywhere outside to close menu */
 .menu-backdrop {
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 99;
+}
+
+.settings img {
+    width: 1.2rem;
+    height: 1.2rem;
 }

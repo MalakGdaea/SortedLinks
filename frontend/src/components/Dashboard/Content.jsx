@@ -26,7 +26,7 @@ function Content() {
       <div className="search-container">
         <img src="search.svg" alt="Search Icon" className="search-icon" />
         <input className="category-input search-input" type="text" value={searchedCategory}
-          placeholder="Find Category" onChange={updateSearchedCategory} />
+          placeholder="Find Collection" onChange={updateSearchedCategory} />
       </div>
       <ActionsBar />
       <div className="path">{selectedSpace?.name} <img src="greater-than.png" /> All Collections</div>

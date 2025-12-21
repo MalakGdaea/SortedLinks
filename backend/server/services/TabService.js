@@ -41,6 +41,24 @@ class TabService {
             }
         }
     }
+
+    async updateName(tabId, userId, newName) {
+        if (!newName || newName.trim() === '') {
+            throw ApiError.badRequest('New tab name is required');
+        }
+
+        const updatedTab = await TabRepository.updateByIdAndUser(
+            tabId,
+            userId,
+            { name: newName.trim() }
+        );
+
+        if (!updatedTab) {
+            throw ApiError.notFound('Tab not found or you do not have permission to edit it');
+        }
+
+        return updatedTab;
+    }
 }
 
 module.exports = new TabService();

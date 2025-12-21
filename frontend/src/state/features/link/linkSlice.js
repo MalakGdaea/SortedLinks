@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchLinks, createLink } from './linkThunks';
+import { fetchLinks, createLink, updateLink, deleteLink } from './linkThunks';
 
 const initialState = {
     links: [],
@@ -38,7 +38,41 @@ const linkSlice = createSlice({
             .addCase(createLink.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-            });
+            })
+            // update link
+            .addCase(updateLink.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(updateLink.fulfilled, (state, action) => {
+                state.loading = false;
+                const updatedLink = action.payload.doc;
+                state.links = state.links.map((link) =>
+                    link._id === updatedLink._id ? updatedLink : link
+                );
+            })
+            .addCase(updateLink.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+
+            //delete link
+            .addCase(deleteLink.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(deleteLink.fulfilled, (state, action) => {
+                const deletedLink = action.payload.doc;
+                state.loading = false;
+                state.error = null;
+                state.links = state.links.filter(
+                    (link) => link._id !== deletedLink._id
+                );
+            })
+            .addCase(deleteLink.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
     },
 });
 

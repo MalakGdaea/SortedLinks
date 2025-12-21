@@ -105,6 +105,15 @@ class ApiService {
         return this._handleResponse(response);
     }
 
+    async updateSpace(spaceId, newName) {
+        const response = await fetch(`${this.baseURL}/tabs/${spaceId}`, {
+            method: 'PATCH',
+            headers: this.getHeaders(),
+            body: JSON.stringify({ name: newName })
+        })
+        return this._handleResponse(response);
+    }
+
 
     // Collection API
     async getCollections() {

@@ -7,6 +7,14 @@ export const SpaceFormInfo = {
     submitBtn: " + Add Space",
 };
 
+export const editSpace = {
+    title: "Change Space Name",
+    fields: [
+        { name: "name", type: "text", placeholder: "new name", required: true },
+    ],
+    submitBtn: " Save",
+};
+
 export const CollectionFormInfo = {
     title: "Add New Collection",
     fields: [
@@ -16,7 +24,7 @@ export const CollectionFormInfo = {
 };
 
 export const editCollection = {
-    title: "Change collection name",
+    title: "Change Collection Name",
     fields: [
         { name: "name", type: "text", placeholder: "new name", required: true },
     ],
@@ -32,4 +40,15 @@ export const LinkFormInfo = {
         { name: "tags", type: "text", placeholder: "Tags (comma separated)" },
     ],
     submitBtn: "+ Add Link",
+};
+
+export const editLink = {
+    title: "Edit Link",
+    fields: [
+        { name: "title", type: "text", placeholder: "Name", required: true },
+        { name: "URL", type: "text", placeholder: "URL", required: true },
+        { name: "note", type: "textarea", placeholder: "Description" },
+        { name: "tags", type: "text", placeholder: "Tags (comma separated)" },
+    ],
+    submitBtn: " Save",
 };

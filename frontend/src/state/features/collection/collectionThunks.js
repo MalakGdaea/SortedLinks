@@ -39,7 +39,7 @@ export const updateCollection = createAsyncThunk(
 
 export const deleteCollection = createAsyncThunk(
     'collections/deleteCollection',
-    async ({ collectionId }, { rejectWithValue }) => {
+    async (collectionId, { rejectWithValue }) => {
         try {
             const response = await ApiService.deleteCollection(collectionId);
             return response;
