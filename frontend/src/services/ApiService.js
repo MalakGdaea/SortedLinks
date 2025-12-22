@@ -79,6 +79,15 @@ class ApiService {
         return this._handleResponse(response);
     }
 
+    async updateLink(id, data) {
+        const response = await fetch(`${this.baseURL}/bookmarks/${id}`, {
+            method: 'PUT',
+            headers: this.getHeaders(),
+            body: JSON.stringify(data),
+        });
+        return this._handleResponse(response);
+    }
+
 
     // Space API
     async getSpaces() {

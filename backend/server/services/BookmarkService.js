@@ -42,6 +42,19 @@ class BookmarkService {
         }
         return BookmarkRepository.deleteByIdAndUser(bookmarkId, userId);
     }
+
+    async update(id, userId, dataToUpdate) {
+        let { URL } = dataToUpdate;
+        URL = URL.trim();
+        if (!URL) {
+            throw ApiError.badRequest('URL is required');
+        }
+        const bookmark = await BookmarkRepository.findByIdAndUser(id, userId);
+        if (!bookmark) {
+            throw ApiError.notFound('Bookmark not found');
+        }
+        return BookmarkRepository.updateByIdAndUser(id, userId, dataToUpdate);
+    }
 }
 
 module.exports = new BookmarkService();

@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const express = require("express");
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3012;
 const { connectToBookmarkDB } = require("./server/services/databaseManager");
 const app = express();
 
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 // CORS middleware
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Methods', 'GET,PATCH,POST,DELETE,OPTIONS')
+  res.header('Access-Control-Allow-Methods', 'GET,PATCH,POST,DELETE,PUT,OPTIONS')
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With')
   next()
 })

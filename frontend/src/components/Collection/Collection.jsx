@@ -13,6 +13,7 @@ function Collection({ collection }) {
   const [collapse, setCollapse] = useState(false);
   const [selectedLink, setSelectedLink] = useState(null);
 
+
   const links = useSelector(state =>
     selectLinksByCollectionId(state, collection._id)
   );

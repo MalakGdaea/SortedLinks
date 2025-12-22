@@ -8,7 +8,7 @@ export const fetchCollections = createAsyncThunk(
             const response = await ApiService.getCollections();
             return response;
         } catch (error) {
-            return rejectWithValue(error.response);
+            return rejectWithValue(error.message);
         }
     }
 )
@@ -20,7 +20,7 @@ export const createCollection = createAsyncThunk(
             const response = await ApiService.createCollection(spaceId, collectionName);
             return response;
         } catch (error) {
-            return rejectWithValue(error.response);
+            return rejectWithValue(error.message);
         }
     }
 )
@@ -32,7 +32,7 @@ export const updateCollection = createAsyncThunk(
             const response = await ApiService.updateCollection(collectionId, newName);
             return response;
         } catch (error) {
-            return rejectWithValue(error.response);
+            return rejectWithValue(error.message);
         }
     }
 )
@@ -44,7 +44,7 @@ export const deleteCollection = createAsyncThunk(
             const response = await ApiService.deleteCollection(collectionId);
             return response;
         } catch (error) {
-            return rejectWithValue(error.response);
+            return rejectWithValue(error.message);
         }
     }
 )

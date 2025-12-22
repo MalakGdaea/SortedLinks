@@ -1,9 +1,12 @@
 import "./Form.css";
+import { useState } from "react";
 
 function Form({ formInfo, onSubmit, hideForm, isLoading, initialValues = {} }) {
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage("");
     const data = {};
     formInfo.fields.forEach((field) => {
       data[field.name] = e.target[field.name].value;
@@ -11,7 +14,8 @@ function Form({ formInfo, onSubmit, hideForm, isLoading, initialValues = {} }) {
     try {
       await onSubmit(data);
     } catch (error) {
-      console.error("Error submitting form:", error);
+      const message = error?.response?.data?.message || error.message || "Something went wrong";
+      setErrorMessage(message);
     }
   };
 
@@ -20,6 +24,11 @@ function Form({ formInfo, onSubmit, hideForm, isLoading, initialValues = {} }) {
       <div className="page-mask"></div>
       <form className="form" onSubmit={handleSubmit}>
         <h4 className="form-title">{formInfo.title}</h4>
+        {errorMessage && (
+          <div className="form-error-banner">
+            {errorMessage}
+          </div>
+        )}
         <div className="form-inputs">
           {formInfo.fields.map((field) => {
             // 1. Handle Select Dropdowns

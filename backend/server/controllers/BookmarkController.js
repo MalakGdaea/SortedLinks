@@ -29,6 +29,21 @@ class BookmarkController {
             next(err);
         }
     }
+
+    async update(req, res, next) {
+        try {
+            const userId = req.user._id;
+            const { id } = req.params;
+            const dataToUpdate = req.body;
+            if (!dataToUpdate) {
+                throw new Error("No data provided for update");
+            }
+            const updated = await BookmarkService.update(id, userId, dataToUpdate);
+            res.status(200).json({ message: 'Bookmark updated successfully', doc: updated });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 module.exports = new BookmarkController();

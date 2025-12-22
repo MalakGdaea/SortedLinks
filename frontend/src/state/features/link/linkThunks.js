@@ -27,9 +27,9 @@ export const createLink = createAsyncThunk(
 
 export const updateLink = createAsyncThunk(
     'links/updateLink',
-    async (updatedDate, { rejectWithValue }) => {
+    async ({ linkId, updatedDate }, { rejectWithValue }) => {
         try {
-            const link = await ApiService.updateLink(updatedDate);
+            const link = await ApiService.updateLink(linkId, updatedDate);
             return link;
         } catch (error) {
             return rejectWithValue(error.message);
@@ -44,7 +44,7 @@ export const deleteLink = createAsyncThunk(
             const response = await ApiService.deleteLink(linkId);
             return response;
         } catch (error) {
-            return rejectWithValue(error.response);
+            return rejectWithValue(error.message);
         }
     }
 )

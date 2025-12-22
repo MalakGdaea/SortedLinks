@@ -82,11 +82,14 @@ export const useFormManager = (contextData = {}) => {
                 ...editLink,
                 title: `Edit Link: ${contextData.link?.title || 'Link'}`
             },
+            initialValues: {
+                title: contextData.link?.title || "",
+                URL: contextData.link?.URL || "",
+                tags: contextData.link?.tags || "",
+                note: contextData.link?.note || "",
+            },
             loading: isLinkLoading,
-            action: (data) => updateLink({
-                linkId: contextData.link?._id,
-                updatedData: data
-            }),
+            action: (data) => updateLink({ linkId: contextData.link?._id, updatedDate: data }),
         }
     };
 
@@ -94,12 +97,8 @@ export const useFormManager = (contextData = {}) => {
 
     const handleSubmit = async (data) => {
         if (!currentForm) return;
-        try {
-            await dispatch(currentForm.action(data)).unwrap();
-            setActiveFormType(null);
-        } catch (err) {
-            console.error("Form Submission Error:", err);
-        }
+        await dispatch(currentForm.action(data)).unwrap();
+        setActiveFormType(null);
     };
 
     return {
@@ -108,6 +107,5 @@ export const useFormManager = (contextData = {}) => {
         currentForm,
         handleSubmit,
         closeForm: () => setActiveFormType(null)
-
     };
 };

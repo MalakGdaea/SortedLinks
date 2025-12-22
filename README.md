@@ -1,34 +1,65 @@
-# Bookmarking application
+# Bookmarking App
 
-# Description
-The goal of the project is to keep the bookmarks organized. The user can save the bookmark in different tabs and different categories, which makes the task of dealing with a lot of bookmarks simple and comfortable.
+A simple full-stack bookmarking application (React frontend + Express/MongoDB backend).
 
-## project functionalities
-* create and delete tab.
-* create a category in a specific tab, and delete it.
-* create a bookmark in a specific category, and delete it.
-* search for a category.
-* search for a bookmark.
+## Features
 
-# technologies 
+- User registration and login (JWT)
+- Create, update, delete bookmarks
+- Organize bookmarks into collection and spaces
+- Protected API routes
 
-## front-end:
-HTML, CCS, JS, React.
+## Tech stack
 
-## back-end:
-Nodejs server with Express, MongoDB.
+- Frontend: React (Create React App)
+- Backend: Node.js, Express
+- Database: MongoDB (mongoose)
 
-# How to Run the Project
-The project currently contains two parts that run on different servers, the front-end `http://localhost:3000` and the back-end `http://localhost:3012`, so the front end sends requests to the server by the fetch method.
+## Repository structure
 
-1. cd to the backend folder and write`npm install` in the terminal .
-2. while you in the backend folder run `node server`
-3. cd to the frontend folder and write run the command `npm install`.
-4. in the frontend folder run `npm start` which will run the app in your default browser.
+- `backend/` — Express server, API routes, controllers, services
+- `frontend/` — React app and UI components
 
-# Extra points
-I didn't add default data to the app so please don't be surprised when it looks empty.
-You can start add tab then categories and bookmarks. You will figure that out. then the app will tack it shape :grin:
-The app will look like this when you save your bookmarks:
+## Prerequisites
 
-![UI](./frontend/UI.png)
+- Node.js (v16+ recommended)
+- npm (comes with Node.js)
+- MongoDB instance (local or hosted)
+
+## Environment
+
+Create a `.env` file in the `backend/` folder with at least the following variables:
+
+- `MONGODB_URI` — MongoDB connection string (default: `mongodb://localhost/bookmarksDB`)
+- `PORT` — (optional) backend port, default `3000`
+- `JWT_SECRET` — secret for signing JWT tokens (set a strong value in production)
+
+Server port recommendation: for local development this project uses `3012` by default in the frontend config.
+Set `PORT=3012` in the backend `.env` and in the frontend use the environment variable `REACT_APP_SERVER_ROUTE` (for example `REACT_APP_SERVER_ROUTE=http://localhost:3012/`) or ensure your frontend API URL points to `http://localhost:3012/`.
+
+## Setup & Run
+
+1. Backend
+
+```bash
+cd backend
+npm install
+npm start
+```
+
+2. Frontend
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+This starts the React development server (usually on `http://localhost:3000`).
+
+
+## Notes
+
+- Default MongoDB connection fallback is `mongodb://localhost/bookmarksDB` (see `backend/server/services/databaseManager.js`).
+- Default JWT secret fallback exists in development, but set `JWT_SECRET` for real deployments.
+

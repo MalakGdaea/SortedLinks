@@ -44,7 +44,7 @@ export const updateSpace = createAsyncThunk(
             const response = await ApiService.updateSpace(spaceId, newName);
             return response;
         } catch (error) {
-            return rejectWithValue(error.response);
+            return rejectWithValue(error.message);
         }
     }
 )
