@@ -57,4 +57,5 @@
 .settings img {
     width: 1.2rem;
     height: 1.2rem;
+    z-index: 1;
 }

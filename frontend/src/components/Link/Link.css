@@ -12,11 +12,17 @@
     flex-direction: column;
     justify-content: center; 
     position: relative;
+    z-index: 1;
 }
 
 .link-card:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
+}
+
+.link-card:hover,
+.link-card:focus-within {
+    z-index: 10; 
 }
 
 .link-card .link {
