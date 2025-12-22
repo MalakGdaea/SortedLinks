@@ -67,8 +67,8 @@ function Space({ space }) {
   return (
     <div onClick={handleClick}
       className={`space-container ${isActive ? "active" : ""}`} >
-      {renderModal()}
       <div className="space-name">
+        {renderModal()}
         <img src="folder.svg" />
         <div
           className='space'

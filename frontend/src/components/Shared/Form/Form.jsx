@@ -20,7 +20,7 @@ function Form({ formInfo, onSubmit, hideForm, isLoading, initialValues = {} }) {
   };
 
   return (
-    <div className="form-container">
+    <div className="form-container" onClick={(e) => e.stopPropagation()}>
       <div className="page-mask"></div>
       <form className="form" onSubmit={handleSubmit}>
         <h4 className="form-title">{formInfo.title}</h4>
