@@ -12,7 +12,7 @@ function SideBar() {
         useFormManager({});
 
     return (
-        <div id="sideBar">
+        <aside id="sideBar" className="sidebar">
             {activeFormType && (
                 <Form
                     formInfo={currentForm.config}
@@ -26,7 +26,7 @@ function SideBar() {
                 ))}
             </div>
             <button className='add-tab-button' onClick={() => setActiveFormType(ADD_SPACE)} >+ New Space</button>
-        </div>
+        </aside >
     );
 }
 

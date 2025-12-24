@@ -58,3 +58,9 @@
     top:2px;
     right: 5px;
 }
+
+@media (max-width: 600px) {
+  .link-card {
+    flex-grow: 1;
+  }
+}

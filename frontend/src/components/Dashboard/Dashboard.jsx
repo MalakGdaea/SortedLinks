@@ -9,8 +9,10 @@ import { fetchCollections } from '../../state/features/collection/collectionThun
 import { useEffect } from 'react';
 import { fetchLinks } from '../../state/features/link/linkThunks.js';
 import { fetchSpaces } from '../../state/features/space/spaceThunks.js';
+import { useState } from 'react';
 
 function Dashboard() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const selectedSpace = useSelector(selectCurrentSpace);
   const dispatch = useDispatch();
 
@@ -22,8 +24,10 @@ function Dashboard() {
 
   return (
     <div id="dashboard">
-      <NavBar />
-      <div id="content-area">
+      <NavBar
+        onMenuClick={() => setIsSidebarOpen(prev => !prev)}
+        isSidebarOpen={isSidebarOpen} />
+      <div id="content-area" className={!isSidebarOpen ? 'collapsed' : ''}>
         <SideBar />
         <main id="main-content">
           {selectedSpace && <Content />}

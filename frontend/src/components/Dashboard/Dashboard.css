@@ -8,6 +8,12 @@
 #content-area {
     display: flex;
     overflow: hidden;
+    position: relative;
+}
+
+#content-area.collapsed .sidebar {
+  opacity: 0;
+  pointer-events: none;
 }
 
 #main-content {
@@ -16,4 +22,35 @@
     position: relative;
     overflow-y: auto;
     background-color: var(--background-color);
+}
+
+@media (min-width: 481px) {
+  #content-area.collapsed .sidebar {
+    width: 0;
+  }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        position: absolute; 
+        top: 0;
+        left: 0;
+        width: 60vw !important;
+        height: 100%;
+        z-index: 999; 
+        transform: translateX(0);
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease;
+    }
+
+    /* When closed on mobile, slide it off-screen to the left */
+    #content-area.collapsed .sidebar {
+        transform: translateX(-100%);
+        visibility: hidden;   
+    }
+
+    /* Ensure main content doesn't shrink when sidebar is open on mobile */
+    #main-content {
+        width: 100vw;
+        flex-shrink: 0;
+    }
 }

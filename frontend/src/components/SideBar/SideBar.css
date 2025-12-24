@@ -1,11 +1,13 @@
 #sideBar {
     background-color: var(--primary-color);
-    width: 20vw;
+    width: 100rem;
     height: 100%;
     margin-top: 0;
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
+    transition: all 0.3s ease, opacity 0.2s ease;
+    overflow: hidden;
 }
 
 .tabs-list {
@@ -26,4 +28,10 @@
     font-weight: 600;
     padding: 10px 0;
     cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .link-card {
+    width: 100%;
+  }
 }
