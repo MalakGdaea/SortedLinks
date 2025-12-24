@@ -131,26 +131,23 @@
   z-index: 1000;
 }
 
-.landing-container {
+.auth-container {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1001; 
   width: 100%;
-  max-width: 450px; 
+  max-width: 22rem; 
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.landing-container:not(:has(.auth-content)) {
-  display: none;
-}
-
 .instructions, #use-cases, #action, .landing-footer  {
   background-color: var(--bgd-sec-color);
 }
+
 
 .instructions {
   padding: 6rem 2rem;
