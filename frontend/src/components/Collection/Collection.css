@@ -66,11 +66,11 @@
     cursor: pointer;
 }
 
-.bookmark-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px; 
-    overflow: visible;
+.bookmarks-constinar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: flex-start;
 }
 
 .collapse-icon img {

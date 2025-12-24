@@ -78,7 +78,7 @@ function Collection({ collection }) {
         </div>
       </div>{
         !collapse &&
-        <div className="bookmark-grid">
+        <div className="bookmarks-constinar">
           {links?.map((link) => (
             <Link key={link._id} link={link}
               onEdit={() => handleLinkAction(EDIT_LINK, link)}

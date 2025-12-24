@@ -43,7 +43,7 @@
   display: flex;  justify-content: flex-end;
 }
 
-button {
+.form-container button {
   margin-left: 0.5rem;
   background-color: white;
   border: none;
@@ -53,7 +53,7 @@ button {
   padding: 0.4rem 1rem;
 }
 
-.create-button {
+.form-container button.create-button {
   background-color: var(--primary-light);
   color: white;
 }

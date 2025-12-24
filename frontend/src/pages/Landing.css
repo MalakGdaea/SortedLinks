@@ -1,86 +1,332 @@
-.landing-page {
-  padding: 2rem;
+.landing-page nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  align-items: center;
+} 
+
+.landing-page a {
+  text-decoration: none;
+  color: inherit;        
+  font-weight: inherit;  
+  font-size: inherit;    
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    background-color: #E5EEF1;
-    border-radius: 2rem;
+.logo {
+  display: flex;
+  align-items: center;
+  gap:4px;
+  color: rgb(92, 141, 172);
+  font-size: 1.2rem;
 }
 
-.landing-page .logo {
-    height: 3rem;
-    margin-left: 20px;
+.logo img {
+  width: 2rem;
 }
 
-.landing-page .login-btn {
-    margin-right: 20px;
-    background-color: #4194C6;
-    color: white;
-    border: none;
-    border-radius: 1px 20px 20px 1px;
-    cursor: pointer;
-    font-size: 1rem;
-    height: 2.3rem;
+.landing-page ul {
+  list-style-type: none;
+  padding:0;
+  margin: 0;
+  display: flex;
+  gap: 3rem;
+  align-items: center;
 }
 
-.hero-content {
-    text-align: center;
-    margin-top: 5rem;
+.landing-page ul li {
+  cursor: pointer;
+  color: var(--font-color)
 }
 
-.hero-content .mail-logo {
-    height: 15rem;
-    margin-bottom: 0.7rem;
+.landing-page ul li:hover {
+  font-weight: bold;
 }
 
-.hero-content p {
-    font-size: 1.3rem;
-    color: #194458;
-    font-weight: 500;
-    margin-top: 0;
+.login {
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.hero-content button {
-   background-color: #4194C6;
-   color: white;
-   font-weight: bold;
-   padding: 0.5rem 1.5rem;
-   width: fit-content;
-   font-size: large;
-   height: fit-content;
+.banner {
+  position: relative; 
+  width: 100%;
+  height: 80vh; 
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  overflow: hidden; 
 }
 
-.landing-container {
+.banner-bg {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  z-index: -1;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  font-size: 1.4rem;
+  margin-left: 10%;
+}
+
+.banner-content p {
+  width: 40vw;
+  margin: 0.7rem 0;
+}
+
+.landing-page .btn {
+  font-size: 0.9rem;
+  padding: 0.4rem;
+  margin-right: 20px;
+  border: 0.09rem solid var(--primary-light);
+  border-radius: 5px;
+  color: var(--primary-light);
+  cursor: pointer;
+  margin-top: 1.5rem;
+}
+
+.landing-page button.signup {
+  background-color: var(--primary-light);
+  color: #fff;
+}
+
+.btn.demo:hover {
+  background-color: var(--primary-light);
+  color: #fff;
+}
+
+.benefits {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  background-color: #fff;
+  padding: 1rem;
+}
+
+.benefits div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.benefits img {
+  width: 2rem;
 }
 
 .backdrop-overlay {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px); 
+  z-index: 1000;
+}
+
+.landing-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001; 
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.75); 
-  z-index: 5;
+  max-width: 450px; 
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.background-image {
-  position: fixed;
+.landing-container:not(:has(.auth-content)) {
+  display: none;
+}
+
+.instructions, #use-cases, #action, .landing-footer  {
+  background-color: var(--bgd-sec-color);
+}
+
+.instructions {
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+section h3 {
+  text-align: center;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #e2e8f0;
+}
+
+.instructions-hint {
+  color: #64748b;
+  margin-bottom: 3rem;
+}
+
+.instructions-content {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 35%;
+}
+
+.step {
+  display: flex;
+  gap: 1rem;
+  padding: 1.2rem;
+  border-radius: 12px;
+  border: 1.4px solid var(--primary-light);
+  background: transparent;
+  cursor: pointer;
+  color: #e2e8f0;
+  text-align: left;
+  transition: all 0.2s ease;
+  align-items: center;
+}
+
+.step h4 {
+  margin-bottom: 10px;
+}
+
+.step:hover {
+  background: var(--primary-light);
+}
+
+.step.active {
+  background: var(--primary-light);
+}
+
+.step-number {
+  width: 2.4rem;
+  height: 2.4rem;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  background-color: var(--bgd-sec-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.video-preview {
+  position: relative; 
+  width: 100%;
+  max-width: 600px; 
+  overflow: hidden;
+  background: #0f172a;
+  border-radius: 16px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.video-preview video {
+  width: 100%;
+  object-fit: cover;   
+  display: block;
+}
+
+.video-overlay {
+  position: absolute; 
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  z-index: -1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.4); 
+  cursor: pointer; 
+}
+
+.play-icon {
+  font-size: 50px;
+  color: white;
+}
+
+#use-cases {
+  border-top: 2px solid #32436d;
+  padding: 60px 20px;
+}
+
+.use-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+  margin-top: 4rem;
+}
+
+.use-case {
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 2px solid var(--primary-light);
+  color: #e2e8f0;
+  text-align: center;
+}
+
+.use-case:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.use-case h4 {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.use-case p {
+    color: #b0b8c3; 
+    font-size: 0.86rem;
+    line-height: 1.6;
+}
+
+.use-case img {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+#action {
+  text-align: center;
+  border-top: 2px solid #32436d;  
+  padding: 60px 20px;
+}
+
+#action p {
+  color: #b0b8c3; 
+  margin-top: 1rem;
+}
+
+.landing-footer {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  font-size: 0.8rem;
+  color: #e2e8f0;
 }
