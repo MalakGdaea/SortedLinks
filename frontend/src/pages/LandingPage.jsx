@@ -49,14 +49,17 @@ const LandingPage = () => {
                     <img src='logo1.png' />
                     <span>SortedLinks</span>
                 </div>
-                <ul>
-                    <li>Features</li>
-                    <li><a href='#use-cases'>Use cases</a></li>
-                </ul>
-                <div className='login' onClick={() => setActiveTab('login')}>Login</div>
+                <div className='login-cont'>
+                    <a href='#use-cases'>Use cases</a>
+                    <div className='login' onClick={() => setActiveTab('login')}>Login</div>
+                </div>
             </nav>
             <div className='banner'>
-                <img src='banner.png' className='banner-bg' alt="background" />
+                {/* <img src='banner.png' className='banner-bg' alt="background" /> */}
+                <picture>
+                    <source srcSet="banner-sm.png" media="(max-width: 480px)" />
+                    <img src="banner.png" alt="Organize your links" className='banner-bg' />
+                </picture>
                 <div className='banner-content'>
                     <h3>Organize your links.<br />
                         Rediscover your knowledge.</h3>
