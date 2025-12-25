@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 
-function NavBar({ onMenuClick }) {
+function NavBar({ onMenuClick, isSidebarOpen }) {
   const navigate = useNavigate();
   const { user, logout } = useContext(AuthContext);
 
@@ -14,7 +14,11 @@ function NavBar({ onMenuClick }) {
 
   return (
     <div className="nav-bar">
-      <img src="menu.png" className="nav-icon" onClick={onMenuClick} />
+      <div class={isSidebarOpen ? `menu-toggle active` : 'menu-toggle'} id="menu" onClick={onMenuClick} >
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
       <img src="logo1.png" alt="Logo" className="nav-icon logo" />
       <div className="nav-right">
         {user && (
