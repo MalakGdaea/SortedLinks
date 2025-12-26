@@ -13,34 +13,36 @@ const Dropdown = ({ options }) => {
         };
     });
 
+    const handleClick = (e) => {
+        e.stopPropagation();
+        setIsOpen(!isOpen);
+    };
+
+
     return (
         <div className="menu-wrapper" ref={dropdownRef} onMouseEnter={(e) => e.stopPropagation()}>
-            <div onClick={() => setIsOpen(!isOpen)} className="dropdown-trigger">
+            <div onClick={(e) => handleClick(e)} className="dropdown-trigger">
                 <span className="settings"><img src={dotsIcon} alt="options" /></span>
             </div>
             {
                 isOpen && (
-                    <>
-                        <div className="menu-backdrop" onClick={() => setIsOpen(false)} />
 
-                        <ul className="options-list" onMouseEnter={(e) => e.stopPropagation()}>
-                            {options.map((option, index) => (
-                                <li
-                                    key={index}
-                                    className={option.className || ''}
-                                    onClick={() => {
-                                        option.onClick();
-                                        setIsOpen(false);
-                                    }}
-                                >
-                                    {option.icon && <img src={option.icon} className="menu-icon" alt="" />}
-                                    {option.label}
-                                </li>
-                            ))}
-                        </ul>
-                    </>
+                    <ul className="options-list" onClick={(e) => e.stopPropagation()}>
+                        {options.map((option, index) => (
+                            <li
+                                key={index}
+                                className={option.className || ''}
+                                onClick={() => {
+                                    option.onClick();
+                                    setIsOpen(false);
+                                }}
+                            >
+                                {option.icon && <img src={option.icon} className="menu-icon" alt="" />}
+                                {option.label}
+                            </li>
+                        ))}
+                    </ul>
                 )
-
             }
         </div>
     );

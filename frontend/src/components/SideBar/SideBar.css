@@ -1,6 +1,7 @@
-#sideBar {
+.sidebar {
     background-color: var(--primary-color);
-    width: 85rem;     
+    width: 20vw;     
+    flex-shrink: 0;  
     height: 100%;
     margin-top: 0;
     margin-bottom: 10px;
