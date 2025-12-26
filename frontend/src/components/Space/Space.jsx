@@ -9,6 +9,7 @@ import { DELETE_SPACE, EDIT_SPACE } from "../../config.js";
 import { useFormManager } from "../../hooks/useFormManager.js";
 import DeleteConfirm from "../Shared/DeleteConfirm/DeleteConfirm.jsx";
 import Form from "../Shared/Form/Form.jsx";
+import { editIcon, folderIcon, trashIcon } from "../../assets/index.js";
 
 function Space({ space }) {
   const dispatch = useDispatch();
@@ -30,12 +31,12 @@ function Space({ space }) {
   const menuOptions = [
     {
       label: 'Rename',
-      icon: 'edit.svg',
+      icon: editIcon,
       onClick: () => setActiveFormType(EDIT_SPACE)
     },
     {
       label: 'Delete',
-      icon: 'trash.svg',
+      icon: trashIcon,
       className: 'delete-option',
       onClick: () => setActiveFormType(DELETE_SPACE)
     }
@@ -69,7 +70,7 @@ function Space({ space }) {
       className={`space-container ${isActive ? "active" : ""}`} >
       <div className="space-name">
         {renderModal()}
-        <img src="folder.svg" />
+        <img src={folderIcon} />
         <div
           className='space'
         >

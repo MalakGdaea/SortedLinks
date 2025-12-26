@@ -62,5 +62,6 @@
 @media (max-width: 600px) {
   .link-card {
     flex-grow: 1;
+    width: 100%;
   }
 }

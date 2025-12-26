@@ -5,6 +5,7 @@ import ActionsBar from "../ActionsBar/ActionsBar";
 import { useSelector } from 'react-redux';
 import { selectCurrentSpace } from '../../state/features/space/spaceSelectors.js';
 import { selectCollectionsByCurrentSpace } from "../../state/features/collection/collectionSelectors.js";
+import { greaterThanIcon, searchIcon } from "../../assets/index.js";
 
 function Content() {
   const [searchedCategory, setSearchedCategory] = useState("");
@@ -24,12 +25,12 @@ function Content() {
   return (
     <div className="main-content-container">
       <div className="search-container">
-        <img src="search.svg" alt="Search Icon" className="search-icon" />
+        <img src={searchIcon} alt="Search Icon" className="search-icon" />
         <input className="category-input search-input" type="text" value={searchedCategory}
           placeholder="Find Collection" onChange={updateSearchedCategory} />
       </div>
       <ActionsBar />
-      <div className="path">{selectedSpace?.name} <img src="greater-than.png" /> All Collections</div>
+      <div className="path">{selectedSpace?.name} <img src={greaterThanIcon} /> All Collections</div>
       <CollectionList collections={wantedCategories} />
     </div>
   );

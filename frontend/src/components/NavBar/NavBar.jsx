@@ -2,6 +2,7 @@ import "./NavBar.css";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import { logoutIcon } from "../../assets";
 
 function NavBar({ onMenuClick, isSidebarOpen }) {
   const navigate = useNavigate();
@@ -19,12 +20,12 @@ function NavBar({ onMenuClick, isSidebarOpen }) {
         <span></span>
         <span></span>
       </div>
-      <img src="logo1.png" alt="Logo" className="nav-icon logo" />
+      <img src="logo.png" alt="Logo" className="nav-icon logo" />
       <div className="nav-right">
         {user && (
           <>
             <span className="user-info">Welcome, {user.name || user.email}</span>
-            <img src="logout.png" className="nav-icon" onClick={handleLogout} />
+            <img src={logoutIcon} className="nav-icon" onClick={handleLogout} />
           </>
         )}
       </div>

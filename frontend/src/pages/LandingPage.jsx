@@ -5,6 +5,7 @@ import Login from '../components/Auth/Login';
 import Register from '../components/Auth/Register';
 import './Landing.css';
 import { useOutsideClick } from "../hooks/useOutsideClick";
+import { archiveIcon, briefcaseIcon, focusIcon, internetIcon, layersIcon, lightbulbIcon, windIcon } from '../assets';
 
 const LandingPage = () => {
     const { isAuthenticated } = useContext(AuthContext);
@@ -46,7 +47,7 @@ const LandingPage = () => {
         <div className="landing-page">
             <nav>
                 <div className='logo'>
-                    <img src='logo1.png' />
+                    <img src='logo.png' />
                     <span>SortedLinks</span>
                 </div>
                 <div className='login-cont'>
@@ -73,15 +74,15 @@ const LandingPage = () => {
             </div>
             <div className='benefits'>
                 <div>
-                    <img src='layers.png' />
+                    <img src={layersIcon} />
                     <span>Smart Organization</span>
                 </div>
                 <div>
-                    <img src='internet.png' />
+                    <img src={internetIcon} />
                     <span>Instant Access</span>
                 </div>
                 <div>
-                    <img src='focus.png' />
+                    <img src={focusIcon} />
                     <span>Stay Focused</span>
                 </div>
             </div>
@@ -148,22 +149,22 @@ const LandingPage = () => {
                 <h3>Why You’ll Love Organizing Your Links</h3>
                 <div className="use-cases-grid">
                     <div className="use-case">
-                        <img src='archive.png' />
+                        <img src={archiveIcon} />
                         <h4>Save Articles to Read Later</h4>
                         <p>Found an interesting article but don’t have time now? Save it and come back when you’re ready.</p>
                     </div>
                     <div className="use-case">
-                        <img src='briefcase.png' />
+                        <img src={briefcaseIcon} />
                         <h4>Keep Project Resources Handy</h4>
                         <p>Collect useful websites, tutorials, or tools in one place while working on a project.</p>
                     </div>
                     <div className="use-case">
-                        <img src='lightbulb.png' />
+                        <img src={lightbulbIcon} />
                         <h4>Organize Ideas and Inspiration</h4>
                         <p>Save links to ideas, videos, or references you want to revisit later.</p>
                     </div>
                     <div className="use-case">
-                        <img src='wind.png' />
+                        <img src={windIcon} />
                         <h4>Quick Access When You Need It</h4>
                         <p>No more digging through browser history—everything you need is right at your fingertips.</p>
                     </div>

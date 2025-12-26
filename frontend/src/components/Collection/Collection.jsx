@@ -8,6 +8,7 @@ import { ADD_LINK, EDIT_COLLECTION, DELETE_COLLECTION, EDIT_LINK, DELETE_LINK } 
 import { useState } from "react";
 import Dropdown from "../Shared/Dropdown/Dropdown";
 import DeleteConfirm from "../Shared/DeleteConfirm/DeleteConfirm";
+import { collapseArrowIcon, editIcon, expandArrowIcon, plusIcon, trashIcon } from "../../assets";
 
 function Collection({ collection }) {
   const [collapse, setCollapse] = useState(false);
@@ -29,12 +30,12 @@ function Collection({ collection }) {
   const menuOptions = [
     {
       label: 'Rename',
-      icon: 'edit.svg',
+      icon: editIcon,
       onClick: () => setActiveFormType(EDIT_COLLECTION)
     },
     {
       label: 'Delete',
-      icon: 'trash.svg',
+      icon: trashIcon,
       className: 'delete-option',
       onClick: () => setActiveFormType(DELETE_COLLECTION)
     }
@@ -70,11 +71,11 @@ function Collection({ collection }) {
       <div className="collection-header">
         <h3 className="collection-title">{collection.name}</h3>
         <div className="collection-actions">
-          <span className="btn add" onClick={() => setActiveFormType(ADD_LINK)}><img src='plus.svg' /></span>
+          <span className="btn add" onClick={() => setActiveFormType(ADD_LINK)}><img src={plusIcon} /></span>
           <span className="btn"><Dropdown options={menuOptions} /></span>
           <span className="collapse-icon btn "
             onClick={() => setCollapse(!collapse)}>
-            <img src={collapse ? "collapse-arrow.png" : "expand-arrow.png"} /></span>
+            <img src={collapse ? collapseArrowIcon : expandArrowIcon} /></span>
         </div>
       </div>{
         !collapse &&

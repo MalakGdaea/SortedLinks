@@ -1,17 +1,18 @@
 import "./Link.css";
 import { getIcon } from "../../config";
 import Dropdown from "../Shared/Dropdown/Dropdown";
+import { editIcon, trashIcon } from "../../assets";
 
 function Link({ link, onEdit, onDelete }) {
   const menuOptions = [
     {
       label: 'Edit',
-      icon: 'edit.svg',
+      icon: editIcon,
       onClick: onEdit
     },
     {
       label: 'Delete',
-      icon: 'trash.svg',
+      icon: trashIcon,
       className: 'delete-option',
       onClick: onDelete
     }

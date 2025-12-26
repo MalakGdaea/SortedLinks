@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import './Dropdown.css';
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
+import { dotsIcon } from '../../../assets';
 
 const Dropdown = ({ options }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +16,7 @@ const Dropdown = ({ options }) => {
     return (
         <div className="menu-wrapper" ref={dropdownRef} onMouseEnter={(e) => e.stopPropagation()}>
             <div onClick={() => setIsOpen(!isOpen)} className="dropdown-trigger">
-                <span className="settings"><img src='dots.png' alt="options" /></span>
+                <span className="settings"><img src={dotsIcon} alt="options" /></span>
             </div>
             {
                 isOpen && (
