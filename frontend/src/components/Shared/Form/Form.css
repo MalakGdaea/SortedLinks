@@ -13,7 +13,7 @@
 .form {
   position: relative; 
   z-index: 10;
-  background-color: #F0F3F6;
+  background: white;
   border-radius: 0.5rem;
   box-shadow: 
         0 10px 40px rgba(0, 0, 0, 0.15),
@@ -35,27 +35,6 @@
   resize: vertical;
   min-height: 4rem;
   max-height: 10rem;  
-}
-
-.options-button {
-  margin-top: 1.5rem;
-  bottom: 1rem;
-  display: flex;  justify-content: flex-end;
-}
-
-.form-container button {
-  margin-left: 0.5rem;
-  background-color: white;
-  border: none;
-  border-radius: 3rem;
-  cursor: pointer;
-  color: #333;
-  padding: 0.4rem 1rem;
-}
-
-.form-container button.create-button {
-  background-color: var(--primary-light);
-  color: white;
 }
 
 .add-input {
@@ -91,10 +70,6 @@
 .form-title {
   margin-top: 0;
   margin-bottom: 10px;
-}
-
-.cancel-btn {
-  background-color: #E1E3E8;
 }
 
 .form-error-banner {

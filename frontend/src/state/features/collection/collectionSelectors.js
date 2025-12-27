@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectCollections = state => state.collections.collections;
+export const selectCollections = state => state.collections.collections;
 
 const selectCurrentSpaceId = state => state.spaces.currentSpace?._id;
 

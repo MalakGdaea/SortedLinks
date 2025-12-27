@@ -31,30 +31,3 @@
   line-height: 1.5;
   margin-bottom: 24px;
 }
-
-.confirm-actions {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-}
-
-.btn-cancel, .btn-delete {
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  flex: 1;
-}
-
-.btn-cancel {
-  background: #f3f4f6;
-  color: #4b5563;
-}
-
-.btn-delete {
-  background: #dc2626; /* Danger Red */
-  color: white;
-}
-
-.btn-delete:hover { background: #b91c1c; }

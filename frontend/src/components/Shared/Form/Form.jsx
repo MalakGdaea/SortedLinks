@@ -2,7 +2,7 @@ import "./Form.css";
 import { useState } from "react";
 
 function Form({ formInfo, onSubmit, hideForm, isLoading, initialValues = {} }) {
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +18,10 @@ function Form({ formInfo, onSubmit, hideForm, isLoading, initialValues = {} }) {
       setErrorMessage(message);
     }
   };
+
+  if (!formInfo) {
+    return <></>
+  }
 
   return (
     <div className="form-container" onClick={(e) => e.stopPropagation()}>
@@ -83,9 +87,9 @@ function Form({ formInfo, onSubmit, hideForm, isLoading, initialValues = {} }) {
             );
           })}
         </div>
-        <div className="options-button">
-          <button onClick={() => hideForm()} className="cancel-btn">Cancel</button>
-          <button className="create-button" type="submit">
+        <div className="confirm-actions">
+          <button onClick={() => hideForm()} className="btn btn-cancel">Cancel</button>
+          <button className="btn-primary btn" type="submit">
             {isLoading ? "Submitting..." : formInfo.submitBtn}
           </button>
         </div>

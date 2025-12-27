@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_COLLECTION, ADD_LINK, ADD_SPACE, EDIT_COLLECTION, EDIT_LINK, EDIT_SPACE } from "../config";
 import { CollectionFormInfo, LinkFormInfo, editLink, editCollection, SpaceFormInfo, editSpace } from "../constants/formInfo";
@@ -9,7 +9,6 @@ import { selectLinksLoading } from "../state/features/link/linkSelectors";
 import { selectCollectionsByCurrentSpace } from "../state/features/collection/collectionSelectors";
 import { selectIsLoading as selectCollectionLoading } from "../state/features/collection/collectionSelectors";
 import { createSpace, updateSpace } from "../state/features/space/spaceThunks";
-
 
 export const useFormManager = (contextData = {}) => {
     const [activeFormType, setActiveFormType] = useState(null);
@@ -106,6 +105,6 @@ export const useFormManager = (contextData = {}) => {
         setActiveFormType,
         currentForm,
         handleSubmit,
-        closeForm: () => setActiveFormType(null)
+        closeForm: () => setActiveFormType(null),
     };
 };

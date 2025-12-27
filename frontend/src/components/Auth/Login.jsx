@@ -55,7 +55,7 @@ const Login = ({ showCard = true }) => {
                         required
                     />
                 </div>
-                <button type="submit" disabled={loading} className="btn-primary">
+                <button type="submit" disabled={loading} className="auth-btn">
                     {loading ? 'Logging in...' : 'Login'}
                 </button>
             </form>

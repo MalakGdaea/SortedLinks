@@ -9,6 +9,7 @@ import { useState } from "react";
 import Dropdown from "../Shared/Dropdown/Dropdown";
 import DeleteConfirm from "../Shared/DeleteConfirm/DeleteConfirm";
 import { collapseArrowIcon, editIcon, expandArrowIcon, plusIcon, trashIcon } from "../../assets";
+import AlertModal from "../Shared/AlertModal/AlertModal";
 
 function Collection({ collection }) {
   const [collapse, setCollapse] = useState(false);

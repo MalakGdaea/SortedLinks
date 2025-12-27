@@ -66,14 +66,14 @@ const DeleteConfirm = ({ action, resourceToDelete, onClose }) => {
 
                 <div className="confirm-actions">
                     <button
-                        className="btn-cancel"
+                        className="btn-cancel btn"
                         onClick={onClose}
                         disabled={isLoading}
                     >
                         Cancel
                     </button>
                     <button
-                        className="btn-delete"
+                        className="btn-delete btn"
                         onClick={handleConfirm}
                     >
                         {isLoading ? "Deleting..." : "Delete"}

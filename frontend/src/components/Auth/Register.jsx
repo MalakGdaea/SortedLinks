@@ -143,7 +143,7 @@ const Register = ({ showCard = true, onSuccess = null, onRegistrationComplete = 
                         required
                     />
                 </div>
-                <button type="submit" disabled={loading} className="btn-primary">
+                <button type="submit" disabled={loading} className="auth-btn">
                     {loading ? 'Registering...' : 'Register'}
                 </button>
             </form>
