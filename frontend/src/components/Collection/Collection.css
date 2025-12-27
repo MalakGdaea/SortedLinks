@@ -30,7 +30,7 @@
     width: 100%;
     height: 100%;
 }
-.collection-actions .btn {
+.collection-actions .col-action {
     font-size: 14px;
     color: #6a6a6a; /* Lighter color for secondary action */
     cursor: pointer;
@@ -47,7 +47,7 @@
     border: 2px solid #E6E8EA;
 }
 
-.collection-container:hover .collection-actions .btn {
+.collection-container:hover .collection-actions .col-action {
     opacity: 1;
 }
 
@@ -55,7 +55,7 @@
     padding: 5px;
 }
 
-.btn:hover {
+.col-action:hover {
     border-color: #007bff;
 }
 

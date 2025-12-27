@@ -72,9 +72,9 @@ function Collection({ collection }) {
       <div className="collection-header">
         <h3 className="collection-title">{collection.name}</h3>
         <div className="collection-actions">
-          <span className="btn add" onClick={() => setActiveFormType(ADD_LINK)}><img src={plusIcon} /></span>
-          <span className="btn"><Dropdown options={menuOptions} /></span>
-          <span className="collapse-icon btn "
+          <span className="col-action add" onClick={() => setActiveFormType(ADD_LINK)}><img src={plusIcon} /></span>
+          <span className="col-action"><Dropdown options={menuOptions} /></span>
+          <span className="collapse-icon col-action "
             onClick={() => setCollapse(!collapse)}>
             <img src={collapse ? collapseArrowIcon : expandArrowIcon} /></span>
         </div>

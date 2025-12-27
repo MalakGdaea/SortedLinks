@@ -46,11 +46,11 @@ const Register = ({ showCard = true, onSuccess = null, onRegistrationComplete = 
                 throw new Error('Passwords do not match');
             }
             if (password.length < 8) {
-                throw new Error('Password must be at least 6 characters');
+                throw new Error('Password must be at least 8 characters');
             }
             if (!isStrongPassword(password)) {
                 throw new Error(
-                    'Password must be at least 8 characters and include uppercase, lowercase, number, and special character'
+                    'Password must include uppercase, lowercase, number, and special character'
                 );
             }
             await register(email, password, name);
