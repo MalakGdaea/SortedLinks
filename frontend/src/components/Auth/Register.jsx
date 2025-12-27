@@ -14,6 +14,24 @@ const Register = ({ showCard = true, onSuccess = null, onRegistrationComplete = 
     const navigate = useNavigate();
     const { register } = useContext(AuthContext);
 
+    const isStrongPassword = (password) => {
+        const strongPasswordRegex =
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&^#()_\-+=])[A-Za-z\d@$!%*?&^#()_\-+=]{8,}$/;
+
+        return strongPasswordRegex.test(password);
+    };
+
+    const getPasswordChecks = (password) => ({
+        length: password.length >= 8,
+        uppercase: /[A-Z]/.test(password),
+        lowercase: /[a-z]/.test(password),
+        number: /\d/.test(password),
+        special: /[@$!%*?&^#()_\-+=]/.test(password),
+    });
+
+    const passwordChecks = getPasswordChecks(password);
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
@@ -27,8 +45,13 @@ const Register = ({ showCard = true, onSuccess = null, onRegistrationComplete = 
             if (password !== confirmPassword) {
                 throw new Error('Passwords do not match');
             }
-            if (password.length < 6) {
+            if (password.length < 8) {
                 throw new Error('Password must be at least 6 characters');
+            }
+            if (!isStrongPassword(password)) {
+                throw new Error(
+                    'Password must be at least 8 characters and include uppercase, lowercase, number, and special character'
+                );
             }
             await register(email, password, name);
             setSuccess('Registration successful! You can now log in.');
@@ -90,6 +113,24 @@ const Register = ({ showCard = true, onSuccess = null, onRegistrationComplete = 
                         placeholder="Enter password"
                         required
                     />
+                    <ul className="password-checklist">
+                        <li className={passwordChecks.length ? 'valid' : ''}>
+                            At least 8 characters
+                        </li>
+                        <li className={passwordChecks.uppercase ? 'valid' : ''}>
+                            One uppercase letter
+                        </li>
+                        <li className={passwordChecks.lowercase ? 'valid' : ''}>
+                            One lowercase letter
+                        </li>
+                        <li className={passwordChecks.number ? 'valid' : ''}>
+                            One number
+                        </li>
+                        <li className={passwordChecks.special ? 'valid' : ''}>
+                            One special character
+                        </li>
+                    </ul>
+
                 </div>
                 <div className="form-group">
                     <label htmlFor="confirmPassword">Confirm Password</label>

@@ -13,6 +13,7 @@
   font-size: 28px;
 }
 
+
 .form-group {
   margin-bottom: 20px;
 }
@@ -100,4 +101,27 @@
 
 .auth-link a:hover {
   text-decoration: underline;
+}
+
+.password-checklist {
+    margin-top: 6px;
+    padding-left: 16px;
+    font-size: 0.7rem;
+    list-style: none;
+}
+
+.password-checklist li {
+    color: #999;
+    margin-bottom: 4px;
+    position: relative;
+}
+
+.password-checklist li::before {
+    content: "•";
+    margin-right: 6px;
+}
+
+.password-checklist li.valid {
+    color: #2e7d32; 
+    font-weight: 500;
 }
