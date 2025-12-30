@@ -24,7 +24,7 @@ app.use(cookieParser());
 const allowedOrigins = [
   'http://localhost:3000',
   'https://sortedlinks.xyz',
-  'https://sortedlinks.vercel.app/'
+  'https://sortedlinks.vercel.app'
 ];
 
 app.use(function (req, res, next) {
