@@ -11,8 +11,6 @@ function errorHandler(err, req, res, next) {
     let message = 'Something went wrong';
 
     // Log the actual error for debugging
-    console.log('Error:', err);
-
     if (err instanceof ApiError) {
         // ApiError messages are safe to send to client
         status = err.statusCode || 500;

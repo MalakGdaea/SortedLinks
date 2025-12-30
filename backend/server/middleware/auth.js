@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = process.env.JWT_SECRET || 'change_this_secret';
 const User = require('../models/User');
+
+const ACCESS_SECRET = process.env.ACCESS_TOKEN_SECRET;
 
 async function auth(req, res, next) {
     const authHeader = req.headers['authorization'] || req.headers['Authorization'];
@@ -11,8 +12,9 @@ async function auth(req, res, next) {
 
     const token = parts[1];
     try {
-        const payload = jwt.verify(token, JWT_SECRET);
-        const user = await User.findById(payload.id).select('-passwordHash');
+        const payload = jwt.verify(token, ACCESS_SECRET);
+        const userId = payload.userId || payload.id;
+        const user = await User.findById(userId).select('-passwordHash');
         if (!user) return res.status(401).json({ message: 'User not found' });
         req.user = user;
         next();

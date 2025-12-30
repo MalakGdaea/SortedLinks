@@ -4,8 +4,10 @@ const JWT_SECRET = process.env.JWT_SECRET || 'change_this_secret';
 const UserRepository = require('../repositories/UserRepository');
 const TabRepository = require('../repositories/TabRepository');
 const ApiError = require('../errors/ApiError');
+const TokenService = require("./TokenService");
 
 class AuthService {
+
     async register(email, password, name) {
         const existing = await UserRepository.findByEmail(email);
         if (existing) {
@@ -20,7 +22,7 @@ class AuthService {
             user: user._id
         });
 
-        return { id: user._id, email: user.email, name: user.name };
+        return { _id: user._id, email: user.email, name: user.name };
     }
 
     async login(email, password) {
@@ -32,8 +34,28 @@ class AuthService {
         if (!ok) {
             throw ApiError.unauthorized('Invalid credentials');
         }
-        const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET, { expiresIn: '7d' });
-        return { token, user: { id: user._id, email: user.email, name: user.name } };
+
+        const accessToken = TokenService.generateAccessToken(user);
+        const refreshToken = TokenService.generateRefreshToken(user);
+        return { accessToken, refreshToken, user: { _id: user._id, email: user.email, name: user.name } };
+    }
+
+    async refresh(refreshToken) {
+        if (!refreshToken) {
+            throw new Error("No refresh token");
+        }
+
+        const payload = TokenService.verifyRefreshToken(refreshToken);
+        const accessToken = TokenService.generateAccessToken({ _id: payload.userId, email: payload.email });
+
+        return {
+            user: {
+                _id: payload.userId,
+                email: payload.email,
+                name: payload.name,
+            },
+            accessToken,
+        };
     }
 }
 
