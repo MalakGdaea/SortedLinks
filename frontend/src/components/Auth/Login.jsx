@@ -1,7 +1,8 @@
-import React, { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
 import './Auth.css';
+import { useDispatch } from "react-redux";
+import { login as loginThunk } from "../../state/features/auth/authThunks";
 
 const Login = ({ showCard = true }) => {
     const [email, setEmail] = useState('');
@@ -9,7 +10,7 @@ const Login = ({ showCard = true }) => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const { login } = useContext(AuthContext);
+    const dispatch = useDispatch();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,8 +21,8 @@ const Login = ({ showCard = true }) => {
             if (!email || !password) {
                 throw new Error('Email and password are required');
             }
-            await login(email, password);
-            navigate('/dashboard');
+            await dispatch(loginThunk({ email, password })).unwrap();
+            navigate("/dashboard");
         } catch (err) {
             setError(err.message || 'Login failed');
         } finally {

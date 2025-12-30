@@ -1,8 +1,11 @@
 import { SERVER_ROUTE } from "../config";
 
 class ApiService {
+
     constructor() {
         this.baseURL = SERVER_ROUTE;
+        this.isRefreshing = false;
+        this.failedQueue = [];
     }
 
     getToken() {
@@ -26,143 +29,173 @@ class ApiService {
         return headers;
     }
 
-    async register(email, password, name) {
-        const response = await fetch(`${this.baseURL}/auth/register`, {
-            method: 'POST',
+    async _request(url, options = {}) {
+        const response = await fetch(`${this.baseURL}${url}`, {
+            ...options,
             headers: this.getHeaders(),
+            credentials: "include",
+        });
+
+        // ONLY attempt refresh if it's NOT a login/register attempt
+        const isAuthRoute = url.includes('/auth/login') || url.includes('/auth/register');
+
+        if (response.status === 401 && !isAuthRoute) {
+            return this._handle401(url, options);
+        }
+
+        return this._handleResponse(response);
+    }
+
+    async _handle401(url, options) {
+        if (this.isRefreshing) {
+            return new Promise((resolve, reject) => {
+                this.failedQueue.push({ resolve, reject });
+            }).then(() => this._request(url, options));
+        }
+
+        this.isRefreshing = true;
+
+        try {
+            const data = await this.refresh();
+            this.setToken(data.accessToken);
+            this._processQueue(null);
+
+            return this._request(url, options);
+        } catch (err) {
+            this._processQueue(err);
+            this.clearLocalSession();
+            throw err;
+        } finally {
+            this.isRefreshing = false;
+        }
+    }
+
+    _processQueue(error) {
+        this.failedQueue.forEach((p) =>
+            error ? p.reject(error) : p.resolve()
+        );
+        this.failedQueue = [];
+    }
+
+    async refresh() {
+        const response = await fetch(`${this.baseURL}/auth/refresh`, {
+            method: "POST",
+            credentials: "include",
+        });
+
+        const data = await this._handleResponse(response);
+        return data; // { user, accessToken }
+    }
+
+    async register(email, password, name) {
+        return this._request("/auth/register", {
+            method: "POST",
             body: JSON.stringify({ email, password, name }),
         });
-        return this._handleResponse(response);
     }
 
     async login(email, password) {
-        const response = await fetch(`${this.baseURL}/auth/login`, {
-            method: 'POST',
-            headers: this.getHeaders(),
+        const data = await this._request("/auth/login", {
+            method: "POST",
             body: JSON.stringify({ email, password }),
         });
-        const data = await this._handleResponse(response);
-        if (data.token) {
-            this.setToken(data.token);
+
+        if (data.accessToken) {
+            this.setToken(data.accessToken);
         }
+
         return data;
     }
 
-    async logout() {
-        this.setToken(null);
+    async clearLocalSession() {
+        localStorage.clear();
     }
-
 
     // Links API
     async getLinks() {
-        const response = await fetch(`${this.baseURL}/bookmarks`, {
-            method: 'GET',
-            headers: this.getHeaders(),
+        return this._request("/bookmarks", {
+            method: 'GET'
         });
-        return this._handleResponse(response);
     }
 
     async createLink(linkData) {
-        const response = await fetch(`${this.baseURL}/bookmarks`, {
+        return this._request("/bookmarks", {
             method: 'POST',
-            headers: this.getHeaders(),
             body: JSON.stringify(linkData),
         });
-        return this._handleResponse(response);
     }
 
     async deleteLink(id) {
-        const response = await fetch(`${this.baseURL}/bookmarks/${id}`, {
+        return this._request(`/bookmarks/${id}`, {
             method: 'DELETE',
-            headers: this.getHeaders(),
         });
-        return this._handleResponse(response);
     }
 
     async updateLink(id, data) {
-        const response = await fetch(`${this.baseURL}/bookmarks/${id}`, {
+        return this._request(`/bookmarks/${id}`, {
             method: 'PUT',
-            headers: this.getHeaders(),
             body: JSON.stringify(data),
         });
-        return this._handleResponse(response);
     }
-
 
     // Space API
     async getSpaces() {
-        const response = await fetch(`${this.baseURL}/tabs`, {
-            method: 'GET',
-            headers: this.getHeaders(),
+        return this._request("/tabs", {
+            method: 'GET'
         });
-        return this._handleResponse(response);
     }
 
     async createSpace(name) {
-        const response = await fetch(`${this.baseURL}/tabs/${name}`, {
+        return this._request(`/tabs/${name}`, {
             method: 'POST',
-            headers: this.getHeaders(),
         });
-        return this._handleResponse(response);
     }
 
     async deleteSpace(name) {
-        const response = await fetch(`${this.baseURL}/tabs/${name}`, {
+        return this._request(`/tabs/${name}`, {
             method: 'DELETE',
-            headers: this.getHeaders(),
         });
-        return this._handleResponse(response);
     }
 
     async updateSpace(spaceId, newName) {
-        const response = await fetch(`${this.baseURL}/tabs/${spaceId}`, {
+        return this._request(`/tabs/${spaceId}`, {
             method: 'PATCH',
-            headers: this.getHeaders(),
             body: JSON.stringify({ name: newName })
-        })
-        return this._handleResponse(response);
+        });
     }
-
 
     // Collection API
     async getCollections() {
-        const response = await fetch(`${this.baseURL}/categories`, {
-            method: 'GET',
-            headers: this.getHeaders(),
+        return this._request("/categories", {
+            method: 'GET'
         });
-
-        return this._handleResponse(response);
     }
 
     async createCollection(spaceId, collectionName) {
-        const response = await fetch(`${this.baseURL}/categories/${spaceId}/${collectionName}`, {
+        return this._request(`/categories/${spaceId}/${collectionName}`, {
             method: 'POST',
-            headers: this.getHeaders(),
         });
-        return this._handleResponse(response);
     }
 
     async deleteCollection(collectionId) {
-        const response = await fetch(`${this.baseURL}/categories/${collectionId}`, {
+        return this._request(`/categories/${collectionId}`, {
             method: 'DELETE',
-            headers: this.getHeaders(),
         });
-        return this._handleResponse(response);
     }
 
     async updateCollection(collectionId, newName) {
-        const response = await fetch(`${this.baseURL}/categories/${collectionId}`, {
+        return this._request(`/categories/${collectionId}`, {
             method: 'PATCH',
-            headers: this.getHeaders(),
             body: JSON.stringify({ name: newName })
-        })
-        return this._handleResponse(response);
+        });
     }
 
     async _handleResponse(response) {
+
         const data = await response.json();
         if (!response.ok) {
-            throw new Error(data.message || `HTTP Error: ${response.status}`);
+            const serverMsg = data.message || data.error || data.msg;
+            throw new Error(serverMsg || `HTTP Error: ${response.status}`);
         }
         return data;
     }

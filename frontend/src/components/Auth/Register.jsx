@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
+import { register } from '../../state/features/auth/authThunks';
+import { useDispatch } from 'react-redux';
+
 import './Auth.css';
 
 const Register = ({ showCard = true, onSuccess = null, onRegistrationComplete = null }) => {
@@ -11,8 +13,8 @@ const Register = ({ showCard = true, onSuccess = null, onRegistrationComplete = 
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { register } = useContext(AuthContext);
 
     const isStrongPassword = (password) => {
         const strongPasswordRegex =
@@ -30,7 +32,6 @@ const Register = ({ showCard = true, onSuccess = null, onRegistrationComplete = 
     });
 
     const passwordChecks = getPasswordChecks(password);
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -53,7 +54,7 @@ const Register = ({ showCard = true, onSuccess = null, onRegistrationComplete = 
                     'Password must include uppercase, lowercase, number, and special character'
                 );
             }
-            await register(email, password, name);
+            await dispatch(register({ email, password, name })).unwrap();
             setSuccess('Registration successful! You can now log in.');
             // Reset form
             setEmail('');
@@ -70,7 +71,7 @@ const Register = ({ showCard = true, onSuccess = null, onRegistrationComplete = 
                 setTimeout(() => navigate('/login'), 1500);
             }
         } catch (err) {
-            setError(err.message || 'Registration failed');
+            setError(err || 'Registration failed');
         } finally {
             setLoading(false);
         }

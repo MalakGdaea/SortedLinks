@@ -1,21 +1,24 @@
 import "./NavBar.css";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
 import { logoutIcon } from "../../assets";
+import { useSelector } from "react-redux";
+import { userSelector } from "../../state/features/auth/authSelectors";
+import { logout } from "../../state/features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 function NavBar({ onMenuClick, isSidebarOpen }) {
   const navigate = useNavigate();
-  const { user, logout } = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const user = useSelector(userSelector);
 
   const handleLogout = async () => {
-    await logout();
+    dispatch(logout());
     navigate("/");
   };
 
   return (
     <div className="nav-bar">
-      <div class={isSidebarOpen ? `menu-toggle active` : 'menu-toggle'} id="menu" onClick={onMenuClick} >
+      <div className={isSidebarOpen ? `menu-toggle active` : 'menu-toggle'} id="menu" onClick={onMenuClick} >
         <span></span>
         <span></span>
         <span></span>

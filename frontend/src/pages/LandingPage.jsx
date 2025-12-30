@@ -1,14 +1,15 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import { useContext, useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../contexts/AuthContext';
 import Login from '../components/Auth/Login';
 import Register from '../components/Auth/Register';
 import './Landing.css';
 import { useOutsideClick } from "../hooks/useOutsideClick";
 import { archiveIcon, briefcaseIcon, focusIcon, internetIcon, layersIcon, lightbulbIcon, windIcon } from '../assets';
+import { useSelector } from 'react-redux';
+import { isAuthenticated as isAuthenticatedSelector } from '../state/features/auth/authSelectors';
 
 const LandingPage = () => {
-    const { isAuthenticated } = useContext(AuthContext);
+    const isAuthenticated = useSelector(isAuthenticatedSelector);
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('');
     const modalRef = useRef(null);
