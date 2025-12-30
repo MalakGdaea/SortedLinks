@@ -24,7 +24,7 @@ const Login = ({ showCard = true }) => {
             await dispatch(loginThunk({ email, password })).unwrap();
             navigate("/dashboard");
         } catch (err) {
-            setError(err.message || 'Login failed');
+            setError(err || 'Login failed');
         } finally {
             setLoading(false);
         }
