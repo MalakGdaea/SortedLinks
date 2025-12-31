@@ -71,7 +71,7 @@ const LandingPage = () => {
                     <button
                         className='signup btn'
                         onClick={() => setActiveTab('register')}>Get started — it’s free</button>
-                    <button className='btn demo'><a href='#instructions'>Watch Demo Video</a></button>
+                    <a href='#instructions' className='btn demo'>Watch Demo Video</a>
                 </div>
             </div>
             <div className='benefits'>

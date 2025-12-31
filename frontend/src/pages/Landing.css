@@ -89,6 +89,8 @@
   color: var(--primary-light);
   cursor: pointer;
   margin-top: 1.5rem;
+  display: inline-block;
+  vertical-align: top;
 }
 
 
