@@ -28,7 +28,7 @@ function NavBar({ onMenuClick, isSidebarOpen }) {
         {user && (
           <>
             <span className="user-info">Welcome, {user.name || user.email}</span>
-            <img src={logoutIcon} className="nav-icon" onClick={handleLogout} />
+            <img src={logoutIcon} className="nav-icon" onClick={handleLogout} alt="Sign out" />
           </>
         )}
       </div>

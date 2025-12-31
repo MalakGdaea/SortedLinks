@@ -25,12 +25,12 @@ function Content() {
   return (
     <div className="main-content-container">
       <div className="search-container">
-        <img src={searchIcon} alt="Search Icon" className="search-icon" />
+        <img src={searchIcon} alt="Search collection" className="search-icon" />
         <input className="category-input search-input" type="text" value={searchedCategory}
           placeholder="Find Collection" onChange={updateSearchedCategory} />
       </div>
       <ActionsBar />
-      <div className="path">{selectedSpace?.name} <img src={greaterThanIcon} /> All Collections</div>
+      <div className="path">{selectedSpace?.name} <img src={greaterThanIcon} alt="Path" /> All Collections</div>
       <CollectionList collections={wantedCategories} />
     </div>
   );

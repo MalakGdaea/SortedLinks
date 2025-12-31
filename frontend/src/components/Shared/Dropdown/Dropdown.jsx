@@ -22,7 +22,7 @@ const Dropdown = ({ options }) => {
     return (
         <div className="menu-wrapper" ref={dropdownRef} onMouseEnter={(e) => e.stopPropagation()}>
             <div onClick={(e) => handleClick(e)} className="dropdown-trigger">
-                <span className="settings"><img src={dotsIcon} alt="options" /></span>
+                <span className="settings"><img src={dotsIcon} alt="Options" /></span>
             </div>
             {
                 isOpen && (
@@ -37,7 +37,7 @@ const Dropdown = ({ options }) => {
                                     setIsOpen(false);
                                 }}
                             >
-                                {option.icon && <img src={option.icon} className="menu-icon" alt="" />}
+                                {option.icon && <img src={option.icon} className="menu-icon" alt={option.label} />}
                                 {option.label}
                             </li>
                         ))}

@@ -48,7 +48,7 @@ const LandingPage = () => {
         <div className="landing-page">
             <nav>
                 <div className='logo'>
-                    <img src='logo.png' />
+                    <img src='logo.png' alt='Logo' />
                     <span>SortedLinks</span>
                 </div>
                 <div className='login-cont'>
@@ -57,9 +57,10 @@ const LandingPage = () => {
                 </div>
             </nav>
             <div className='banner'>
-                {/* <img src='banner.png' className='banner-bg' alt="background" /> */}
                 <picture>
-                    <source srcSet="banner-sm.png" media="(max-width: 480px)" />
+                    <source srcSet="banner-sm.webp" media="(max-width: 480px)" type="image/webp" />
+                    <source srcSet="banner-sm.png" media="(max-width: 480px)" type="image/png" />
+                    <source srcSet="banner.webp" type="image/webp" />
                     <img src="banner.png" alt="Organize your links" className='banner-bg' />
                 </picture>
                 <div className='banner-content'>
@@ -75,15 +76,15 @@ const LandingPage = () => {
             </div>
             <div className='benefits'>
                 <div>
-                    <img src={layersIcon} />
+                    <img src={layersIcon} alt='Smart Organization' />
                     <span>Smart Organization</span>
                 </div>
                 <div>
-                    <img src={internetIcon} />
+                    <img src={internetIcon} alt='Instant access' />
                     <span>Instant Access</span>
                 </div>
                 <div>
-                    <img src={focusIcon} />
+                    <img src={focusIcon} alt='stay focused' />
                     <span>Stay Focused</span>
                 </div>
             </div>
@@ -150,22 +151,22 @@ const LandingPage = () => {
                 <h3>Why You’ll Love Organizing Your Links</h3>
                 <div className="use-cases-grid">
                     <div className="use-case">
-                        <img src={archiveIcon} />
+                        <img src={archiveIcon} alt='Save Articles to Read Later' />
                         <h4>Save Articles to Read Later</h4>
                         <p>Found an interesting article but don’t have time now? Save it and come back when you’re ready.</p>
                     </div>
                     <div className="use-case">
-                        <img src={briefcaseIcon} />
+                        <img src={briefcaseIcon} alt='Keep Bookmarks Handy' />
                         <h4>Keep Project Resources Handy</h4>
                         <p>Collect useful websites, tutorials, or tools in one place while working on a project.</p>
                     </div>
-                    <div className="use-case">
-                        <img src={lightbulbIcon} />
+                    <div className="use-case" >
+                        <img src={lightbulbIcon} alt='Organize Ideas and Inspiration' />
                         <h4>Organize Ideas and Inspiration</h4>
                         <p>Save links to ideas, videos, or references you want to revisit later.</p>
                     </div>
                     <div className="use-case">
-                        <img src={windIcon} />
+                        <img src={windIcon} alt='Quick access the bookmarks' />
                         <h4>Quick Access When You Need It</h4>
                         <p>No more digging through browser history—everything you need is right at your fingertips.</p>
                     </div>
