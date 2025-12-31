@@ -3,14 +3,8 @@ const { createWriteStream } = require('fs');
 
 // List static routes you want in the sitemap. Add dynamic routes generation if needed.
 const pages = [
-    '/',
-    '/home',
-    '/dashboard',
-    '/collections',
-    '/login',
-    '/register'
+    '/'
 ];
-
 const hostname = 'https://sortedlinks.vercel.app';
 const sitemapPath = './public/sitemap.xml';
 
