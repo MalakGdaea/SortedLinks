@@ -14,10 +14,9 @@
   align-items: center;
   gap: 1rem;
 }
-
 .menu-toggle {
   width: 2.5rem;      
-  height: 1.875rem;   
+  height: 1.5rem;   
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -27,27 +26,27 @@
 .menu-toggle span {
   display: block;
   height: 0.25rem;   
-  width: 90%;
+  width: 90%;      
   background-color: #333;
   border-radius: 0.25rem; 
-  transition: all 0.4s ease-in-out;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* TOP BAR */
 .menu-toggle.active span:nth-child(1) {
-  transform: translateY(0.8125rem) rotate(45deg); 
+  transform: translateY(0.625rem) rotate(45deg); 
 }
 
 /* MIDDLE BAR */
 .menu-toggle.active span:nth-child(2) {
-  width: 10%;
-  margin: 0 auto;
-  opacity: 0.8;
+  opacity: 0;
+  transform: translateX(-10px); 
 }
 
 /* BOTTOM BAR */
 .menu-toggle.active span:nth-child(3) {
-  transform: translateY(-0.8125rem) rotate(-45deg); 
+  /* Calculated for 1.5rem height */
+  transform: translateY(-0.625rem) rotate(-45deg); 
 }
 
 .user-settings {

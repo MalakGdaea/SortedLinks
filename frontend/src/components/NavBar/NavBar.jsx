@@ -5,20 +5,26 @@ import { userSelector } from "../../state/features/auth/authSelectors";
 import { logout } from "../../state/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { logoutIcon, profileIcon } from "../../assets";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
 
 function NavBar({ onMenuClick, isSidebarOpen }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(userSelector);
   const [isListOpen, setIsListOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const handleLogout = async () => {
     dispatch(logout());
     navigate("/");
   };
 
-
+  useOutsideClick(dropdownRef, () => {
+    if (isListOpen) {
+      setIsListOpen(false);
+    };
+  });
 
   return (
     <div className="nav-bar">
@@ -35,7 +41,7 @@ function NavBar({ onMenuClick, isSidebarOpen }) {
 
             {/* Dropdown */}
             {isListOpen && (
-              <div className="dropdown">
+              <div className="dropdown" ref={dropdownRef}>
                 <div className="user-info">
                   <div className="user-settings">{user.name && user.name[0]}</div>
                   <div>
