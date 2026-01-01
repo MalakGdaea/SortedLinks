@@ -24,6 +24,7 @@ function Link({ link, onEdit, onDelete }) {
         <img className="site-icon"
           src={getIcon(link.URL)} alt={link.title} />
         <div className="link-name"> {link.title}</div>
+        <p>{link.description}</p>
       </a>
       <div className="link-settings"><Dropdown options={menuOptions} /></div>
     </div>

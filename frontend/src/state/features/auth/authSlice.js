@@ -6,7 +6,7 @@ import ApiService from "../../../services/ApiService";
 const initialState = {
     user: null,
     token: null,
-    isLoading: false,
+    isLoading: true,
     error: null,
 }
 
@@ -17,10 +17,12 @@ const authSlice = createSlice({
         setAuth: (state, action) => {
             state.user = action.payload.user;
             state.token = action.payload.accessToken;
+            state.isLoading = false;
         },
         logout: (state) => {
             state.user = null;
             state.token = null;
+            state.isLoading = false;
             ApiService.clearLocalSession();
         }
     },
