@@ -346,8 +346,9 @@ section h3 {
     margin: 0;
   }
 
-  .banner-content h3 {
+  .banner-content h1 {
     margin-bottom: 3rem;
+    font-size: 2rem;
   }
 
   .banner-content p {
