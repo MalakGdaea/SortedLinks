@@ -15,6 +15,7 @@ import searchIcon from './search.svg';
 import trashIcon from './trash.svg';
 import windIcon from './wind.png';
 import editIcon from './edit.svg';
+import profileIcon from './profile.png';
 
 export {
     archiveIcon,
@@ -34,4 +35,5 @@ export {
     trashIcon,
     windIcon,
     editIcon,
+    profileIcon,
 }

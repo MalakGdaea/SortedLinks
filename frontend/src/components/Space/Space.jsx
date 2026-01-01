@@ -70,7 +70,7 @@ function Space({ space }) {
       className={`space-container ${isActive ? "active" : ""}`} >
       <div className="space-name">
         {renderModal()}
-        <img src={folderIcon} alt="Folder" />
+        <img src={folderIcon} alt="Folder" className="folder" />
         <div
           className='space'
         >

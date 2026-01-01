@@ -21,10 +21,12 @@ function Link({ link, onEdit, onDelete }) {
   return (
     <div className="link-card">
       <a className="link" href={link.URL} target="_blank" rel="noopener noreferrer">
-        <img className="site-icon"
-          src={getIcon(link.URL)} alt={link.title} />
-        <div className="link-name"> {link.title}</div>
-        <p>{link.description}</p>
+        <div className="link-header">
+          <img className="site-icon"
+            src={getIcon(link.URL)} alt={link.title} />
+          <div className="link-name"> {link.title}</div>
+        </div>
+        {link.note && <p className="link-description">{link.note}</p>}
       </a>
       <div className="link-settings"><Dropdown options={menuOptions} /></div>
     </div>

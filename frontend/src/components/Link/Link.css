@@ -27,10 +27,17 @@
 
 .link-card .link {
     display: flex;
-    align-items: center; 
+    align-items: start; 
+    flex-direction: column;
     text-decoration: none; 
     color: inherit; 
     width: 100%;
+}
+
+.link-card .link-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.7rem;
 }
 
 .link-card .site-icon {
@@ -51,6 +58,17 @@
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis; 
+}
+
+.link .link-description {
+    font-size: 0.9rem;
+    color: var(--font-color);
+    border-top: 2px solid #EEF0F2;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    padding: 0.6rem 0rem 0rem 0.6rem;
 }
 
 .link-settings {
