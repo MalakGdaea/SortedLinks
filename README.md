@@ -1,6 +1,10 @@
-# Bookmarking App
+# SortedLinks — Smart Bookmark Manager
 
-A simple full-stack bookmarking application (React frontend + Express/MongoDB backend).
+[Live Demo](https://sortedlinks.vercel.app/) | [Backend API Documentation](#)
+
+**[SortedLinks](https://sortedlinks.vercel.app/)** is a powerful tool designed to help you **[organize bookmarks](https://sortedlinks.vercel.app/)** and **save links** into custom collections and spaces. It solves digital clutter by providing instant access to your saved knowledge across any device.
+
+![SortedLinks Preview](frontend/public/og-image.jpg)
 
 ## Features
 
