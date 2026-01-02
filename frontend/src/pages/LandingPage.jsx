@@ -1,12 +1,12 @@
-import { useState, useRef, useEffect, lazy } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Landing.css';
 import { useOutsideClick } from "../hooks/useOutsideClick";
 import { archiveIcon, briefcaseIcon, focusIcon, internetIcon, layersIcon, lightbulbIcon, windIcon } from '../assets';
 import { useSelector } from 'react-redux';
 import { isAuthenticated as isAuthenticatedSelector } from '../state/features/auth/authSelectors';
-const Login = lazy(() => import('../components/Auth/Login'));
-const Register = lazy(() => import('../components/Auth/Register'));
+import Login from '../components/Auth/Login';
+import Register from '../components/Auth/Register';
 
 const LandingPage = () => {
     const isAuthenticated = useSelector(isAuthenticatedSelector);
@@ -26,13 +26,12 @@ const LandingPage = () => {
     }, [isAuthenticated, navigate]);
 
     useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.play().catch(() => { });
-        }
+        handleStepClick('create-space');
     }, []);
 
     const handlePlay = () => {
         if (!videoRef.current) return;
+        videoRef.current.play().catch(() => { });
         setIsPlaying(true);
     };
 
@@ -41,6 +40,7 @@ const LandingPage = () => {
         setIsPlaying(false);
         if (videoRef.current) {
             videoRef.current.load();
+            videoRef.current.pause();
         }
     };
 
@@ -78,15 +78,15 @@ const LandingPage = () => {
                 </div>
                 <div className='benefits'>
                     <div>
-                        <img src={layersIcon} alt='Smart Organization' />
+                        <img src={layersIcon} alt='Smart Organization' loading="lazy" />
                         <span>Smart Organization</span>
                     </div>
                     <div>
-                        <img src={internetIcon} alt='Instant access' />
+                        <img src={internetIcon} alt='Instant access' loading="lazy" />
                         <span>Instant Access</span>
                     </div>
                     <div>
-                        <img src={focusIcon} alt='stay focused' />
+                        <img src={focusIcon} alt='stay focused' loading="lazy" />
                         <span>Stay Focused</span>
                     </div>
                 </div>
@@ -129,18 +129,11 @@ const LandingPage = () => {
                         </div>
 
                         <div className="video-preview" onClick={handlePlay}>
-                            {!currentVideoName && (
-                                <div className="video-overlay">
-                                    <span className="play-icon">▶</span>
-                                </div>
-                            )}
-
                             <video
                                 ref={videoRef}
-                                autoPlay
                                 muted
                                 playsInline
-                                preload="metadata"
+                                preload="none"
                                 controls={isPlaying}
                             >
                                 <source src={`/videos/${currentVideoName}.mp4`} type="video/mp4" />

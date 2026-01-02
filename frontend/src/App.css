@@ -14,13 +14,6 @@
   text-align: center;
 }
 
-body {
-  padding-top: 0;
-  font-family: 'Inter', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 * {
     margin: 0;
     padding: 0;
