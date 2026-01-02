@@ -62,7 +62,8 @@ const LandingPage = () => {
                         <source srcSet="banner-sm.webp" media="(max-width: 480px)" type="image/webp" />
                         <source srcSet="banner-sm.png" media="(max-width: 480px)" type="image/png" />
                         <source srcSet="banner.webp" type="image/webp" />
-                        <img src="banner.png" alt="Organize your links" className='banner-bg' />
+                        <img src="banner.png" alt="Organize your links" fetchpriority="high"
+                            loading="eager" className='banner-bg' decoding="async" />
                     </picture>
                     <div className='banner-content'>
                         <h1>Organize your links.<br />
