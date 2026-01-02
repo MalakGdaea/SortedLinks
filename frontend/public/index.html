@@ -4,7 +4,9 @@
 <head>
   <meta charset="utf-8" />
   <link rel="icon" href="%PUBLIC_URL%/logo.png" />
-  <link rel="preload" as="image" href="/banner.webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="/banner-sm.webp" media="(max-width: 480px)" fetchpriority="high" />
+
+  <link rel="preload" as="image" href="/banner.webp" media="(min-width: 481px)" fetchpriority="high" />
   <link rel="canonical" href="https://sortedlinks.vercel.app/" />
   <meta name="description"
     content="SortedLinks — save, organize and share your bookmarks easily. Tags, folders, quick search, and cross-device sync." />
