@@ -1,12 +1,12 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, lazy } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Login from '../components/Auth/Login';
-import Register from '../components/Auth/Register';
 import './Landing.css';
 import { useOutsideClick } from "../hooks/useOutsideClick";
 import { archiveIcon, briefcaseIcon, focusIcon, internetIcon, layersIcon, lightbulbIcon, windIcon } from '../assets';
 import { useSelector } from 'react-redux';
 import { isAuthenticated as isAuthenticatedSelector } from '../state/features/auth/authSelectors';
+const Login = lazy(() => import('../components/Auth/Login'));
+const Register = lazy(() => import('../components/Auth/Register'));
 
 const LandingPage = () => {
     const isAuthenticated = useSelector(isAuthenticatedSelector);
@@ -59,8 +59,8 @@ const LandingPage = () => {
             <main>
                 <div className='banner'>
                     <picture>
-                        <source srcSet="banner-sm.webp" media="(max-width: 480px)" type="image/webp" />
-                        <source srcSet="banner-sm.png" media="(max-width: 480px)" type="image/png" />
+                        <source srcSet="banner-sm.webp" media="(max-width: 480px)" type="image/webp" fetchpriority="high" />
+                        <source srcSet="banner-sm.png" media="(max-width: 480px)" type="image/png" fetchpriority="high" />
                         <source srcSet="banner.webp" type="image/webp" />
                         <img src="banner.png" alt="Organize your links" fetchpriority="high"
                             loading="eager" className='banner-bg' decoding="async" />
@@ -140,7 +140,7 @@ const LandingPage = () => {
                                 autoPlay
                                 muted
                                 playsInline
-                                preload="auto"
+                                preload="metadata"
                                 controls={isPlaying}
                             >
                                 <source src={`/videos/${currentVideoName}.mp4`} type="video/mp4" />

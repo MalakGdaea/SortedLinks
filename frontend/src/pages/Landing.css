@@ -63,6 +63,7 @@
   object-fit: cover; 
   z-index: -1;
   display: block;
+  aspect-ratio: 1920 / 1080;
 }
 
 .banner-content {
