@@ -2,6 +2,8 @@ import { createSelector } from 'reselect';
 
 export const selectCollections = state => state.collections.collections;
 
+export const selectCollectionCount = (state) => state.collections.collections.length;
+
 const selectCurrentSpaceId = state => state.spaces.currentSpace?._id;
 
 export const selectCurrentCollection = (state) => state.collections.currentCollection;

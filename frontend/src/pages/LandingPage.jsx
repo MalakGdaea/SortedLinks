@@ -133,7 +133,6 @@ const LandingPage = () => {
                                 ref={videoRef}
                                 muted
                                 playsInline
-                                preload="none"
                                 controls={isPlaying}
                             >
                                 <source src={`/videos/${currentVideoName}.mp4`} type="video/mp4" />

@@ -2,6 +2,8 @@ import { createSelector } from '@reduxjs/toolkit';
 
 export const selectLinks = (state) => state.links.links;
 
+export const selectLinksCount = (state) => state.links.links.length;
+
 export const selectLinksLoading = (state) => state.links.loading;
 
 export const selectLinksError = (state) => state.links.error;

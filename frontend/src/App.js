@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { initializeAuth } from "./state/features/auth/authThunks";
 import { logout } from "./state/features/auth/authSlice";
 import ApiService from "./services/ApiService";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,14 @@ function App() {
           element={
             <ProtectedRoute>
               <HomePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
             </ProtectedRoute>
           }
         />

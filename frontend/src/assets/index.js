@@ -16,6 +16,9 @@ import trashIcon from './trash.svg';
 import windIcon from './wind.png';
 import editIcon from './edit.svg';
 import profileIcon from './profile.png';
+import cameraIcon from './camera.png';
+import downloadIcon from './download.png';
+import lockIcon from './lock.png';
 
 export {
     archiveIcon,
@@ -36,4 +39,7 @@ export {
     windIcon,
     editIcon,
     profileIcon,
+    cameraIcon,
+    downloadIcon,
+    lockIcon,
 }

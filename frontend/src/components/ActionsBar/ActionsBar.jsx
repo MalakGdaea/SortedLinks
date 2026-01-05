@@ -1,4 +1,5 @@
 import "./ActionsBar.css";
+import React from 'react';
 import Form from "../Shared/Form/Form.jsx";
 import { useSelector } from "react-redux";
 import { selectCurrentSpace } from "../../state/features/space/spaceSelectors.js";
@@ -56,4 +57,4 @@ function ActionsBar() {
   );
 }
 
-export default ActionsBar;
+export default React.memo(ActionsBar);

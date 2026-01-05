@@ -50,14 +50,16 @@ function NavBar({ onMenuClick, isSidebarOpen }) {
                   </div>
                 </div>
 
-                <div className="divider" />
+                <div className="mini-divider" />
 
-                <button className="dropdown-item">
+                <button
+                  className="dropdown-item profile"
+                  onClick={() => navigate("/profile")}>
                   <img src={profileIcon} alt="profile" />
                   <span>Profile</span>
                 </button>
 
-                <div className="divider" />
+                <div className="mini-divider" />
 
                 <button
                   className="dropdown-item logout"

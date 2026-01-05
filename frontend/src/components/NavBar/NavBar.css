@@ -105,7 +105,7 @@
 }
 
 /* Divider */
-.divider {
+.mini-divider{
   height: 1px;
   background: #f1f5f9;
   margin: 4px 0;
